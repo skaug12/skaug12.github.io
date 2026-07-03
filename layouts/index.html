@@ -1,0 +1,27 @@
+{{ define "main" }}
+<div class="intro">
+  <h1>{{ .Site.Title }}</h1>
+  <p>{{ .Site.Params.description }}</p>
+  {{ .Content }}
+</div>
+{{ $posts := where .Site.RegularPages "Section" "posts" }}
+{{ with $posts }}
+<h2>최근 글</h2>
+<ul class="post-list">
+  {{ range first 10 . }}
+  <li>
+    <a href="{{ .Permalink }}">{{ .Title }}</a><span class="date">{{ .Date.Format "2006-01-02" }}</span>
+    {{ with or .Params.summary .Summary }}<p>{{ . | plainify }}</p>{{ end }}
+  </li>
+  {{ end }}
+</ul>
+{{ end }}
+{{ with .Site.Taxonomies.series }}
+<h2>연재</h2>
+<ul class="post-list">
+  {{ range $name, $taxonomy := . }}
+  <li><a href="{{ "series/" | absURL }}{{ $name | urlize }}/">{{ $taxonomy.Page.Title }}</a><span class="date">{{ $taxonomy.Count }}편</span></li>
+  {{ end }}
+</ul>
+{{ end }}
+{{ end }}

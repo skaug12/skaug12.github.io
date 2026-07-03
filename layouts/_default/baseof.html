@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html lang="ko">
+{{ partial "head.html" . }}
+<body>
+  <div class="wrap">
+    {{ partial "header.html" . }}
+    <main>{{ block "main" . }}{{ end }}</main>
+    {{ partial "footer.html" . }}
+  </div>
+</body>
+</html>
