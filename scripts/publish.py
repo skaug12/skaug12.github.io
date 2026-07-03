@@ -4,13 +4,19 @@
 기본 실행은 dry-run: 발행 대상만 보여준다. 실제 발행은 --go.
 
 흐름: Memo/콘텐츠파이프라인/블로그/ 안의 md 중 frontmatter `status: publish`인 글을
-content/posts/{slug}.md로 변환·복사 → git commit·push → GitHub Actions 빌드 대기
-→ 라이브 URL 검증 → 성공 시 원본 frontmatter를 status: published + posted_url로 갱신.
+content/posts/{slug}.md로 변환·복사 → main 커밋·푸시 → 로컬 hugo 빌드 →
+public/을 gh-pages 브랜치로 강제 푸시 → 라이브 URL 검증
+→ 성공 시 원본 frontmatter를 status: published + posted_url로 갱신.
 
 원본 노트의 본문은 절대 수정하지 않는다 (frontmatter만 갱신).
+
+배포 방식 메모: gh 토큰에 workflow 스코프가 없어 GitHub Actions 대신
+로컬 빌드 + gh-pages 브랜치 배포를 쓴다. 스코프를 부여하면
+scripts/hugo-workflow.yml.txt를 .github/workflows/hugo.yml로 옮겨 CI 배포로 전환 가능.
 """
 import argparse
 import re
+import shutil
 import subprocess
 import sys
 import time
@@ -21,7 +27,10 @@ from datetime import date
 VAULT = Path.home() / "Library/Mobile Documents/iCloud~md~obsidian/Documents/Memo/콘텐츠파이프라인/블로그"
 REPO = Path(__file__).resolve().parent.parent
 CONTENT = REPO / "content" / "posts"
+PUBLIC = REPO / "public"
 BASE_URL = "https://skaug12.github.io"  # 도메인 연결 시 여기와 hugo.toml baseURL을 함께 수정
+REMOTE = "https://github.com/skaug12/skaug12.github.io.git"
+HUGO = shutil.which("hugo") or "/opt/homebrew/bin/hugo"
 
 
 def split_frontmatter(text: str):
@@ -77,13 +86,14 @@ def mark_published(f: Path, url: str):
     f.write_text(text, encoding="utf-8")
 
 
-def verify_live(url: str, title: str, timeout_s: int = 360) -> bool:
+def verify_live(url: str, needle: str, timeout_s: int = 300) -> bool:
     deadline = time.time() + timeout_s
     while time.time() < deadline:
         try:
-            with urllib.request.urlopen(url, timeout=15) as r:
+            req = urllib.request.Request(f"{url}?v={int(time.time())}")
+            with urllib.request.urlopen(req, timeout=15) as r:
                 html = r.read().decode("utf-8", errors="ignore")
-                if r.status == 200 and title in html:
+                if r.status == 200 and needle in html:
                     return True
         except Exception:
             pass
@@ -91,9 +101,26 @@ def verify_live(url: str, title: str, timeout_s: int = 360) -> bool:
     return False
 
 
-def run(cmd, **kw):
+def run(cmd, cwd=REPO, **kw):
     print(f"$ {' '.join(cmd)}")
-    return subprocess.run(cmd, cwd=REPO, check=True, **kw)
+    return subprocess.run(cmd, cwd=cwd, check=True, **kw)
+
+
+def deploy():
+    """로컬 빌드 후 public/을 gh-pages로 강제 푸시 (임시 git)."""
+    run([HUGO, "--minify"])
+    (PUBLIC / ".nojekyll").touch()
+    git_dir = PUBLIC / ".git"
+    if git_dir.exists():
+        shutil.rmtree(git_dir)
+    try:
+        run(["git", "init", "-b", "gh-pages", "-q"], cwd=PUBLIC)
+        run(["git", "add", "-A"], cwd=PUBLIC)
+        run(["git", "commit", "-q", "-m", f"deploy: {date.today().isoformat()}"], cwd=PUBLIC)
+        run(["git", "push", "-f", REMOTE, "gh-pages"], cwd=PUBLIC)
+    finally:
+        if git_dir.exists():
+            shutil.rmtree(git_dir)
 
 
 def main():
@@ -125,7 +152,9 @@ def main():
     run(["git", "commit", "-m", f"post: {titles}"])
     run(["git", "push"])
 
-    print("\nGitHub Actions 빌드·배포 대기 후 라이브 검증...")
+    deploy()
+
+    print("\n라이브 검증...")
     ok_all = True
     for f, fm, _ in targets:
         url = f"{BASE_URL}/posts/{fm['slug']}/"
@@ -134,7 +163,7 @@ def main():
             mark_published(f, url)
         else:
             ok_all = False
-            print(f"✗ 검증 실패 (6분 내 미반영): {url} — Actions 탭 확인 필요")
+            print(f"✗ 검증 실패 (5분 내 미반영): {url} — Pages 빌드 상태 확인 필요")
 
     sys.exit(0 if ok_all else 1)
 
