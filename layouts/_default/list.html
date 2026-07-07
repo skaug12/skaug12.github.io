@@ -1,12 +1,23 @@
 {{ define "main" }}
-<h1>{{ .Title }}</h1>
-{{ .Content }}
-<ul class="post-list">
-  {{ range .Pages.ByDate.Reverse }}
-  <li>
-    <a href="{{ .Permalink }}">{{ .Title }}</a><span class="date">{{ .Date.Format "2006-01-02" }}</span>
-    {{ with or .Params.summary .Summary }}<p>{{ . | plainify }}</p>{{ end }}
-  </li>
-  {{ end }}
-</ul>
+<div class="wrap">
+  <div class="page-head">
+    <h1>{{ .Title }}</h1>
+    {{ with .Content }}<div class="lede">{{ . }}</div>{{ end }}
+  </div>
+  <div class="latest">
+    <div class="list">
+      {{ range .Pages.ByDate.Reverse }}
+      {{ $cat := "" }}{{ with .Params.categories }}{{ $cat = index . 0 }}{{ end }}
+      <article class="item{{ if eq $cat "생각" }} essay{{ end }}">
+        <div class="tag{{ if eq $cat "인사이트 노트" }} note{{ end }}">{{ with $cat }}{{ . }}{{ else }}글{{ end }}</div>
+        <div class="body">
+          <h3><a href="{{ .Permalink }}">{{ .Title }}</a></h3>
+          {{ with or .Params.summary .Summary }}<p>{{ . | plainify }}</p>{{ end }}
+        </div>
+        <div class="date">{{ .Date.Format "1월 2일" }}</div>
+      </article>
+      {{ end }}
+    </div>
+  </div>
+</div>
 {{ end }}

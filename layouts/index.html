@@ -1,27 +1,71 @@
 {{ define "main" }}
-<div class="intro">
-  <h1>{{ .Site.Title }}</h1>
-  <p>{{ .Site.Params.description }}</p>
-  {{ .Content }}
-</div>
 {{ $posts := where .Site.RegularPages "Section" "posts" }}
-{{ with $posts }}
-<h2>최근 글</h2>
-<ul class="post-list">
-  {{ range first 10 . }}
-  <li>
-    <a href="{{ .Permalink }}">{{ .Title }}</a><span class="date">{{ .Date.Format "2006-01-02" }}</span>
-    {{ with or .Params.summary .Summary }}<p>{{ . | plainify }}</p>{{ end }}
-  </li>
+
+<section class="hero-o">
+  <div class="wrap hero">
+    <p class="kicker"><span class="dot">■</span>&nbsp;<span class="tw" data-text="{{ .Site.Params.author }} · 독립자본을 쌓는 기록">{{ .Site.Params.author }} · 독립자본을 쌓는 기록</span><span class="caret" aria-hidden="true"></span></p>
+    <div class="thesis">
+      <p class="lead reveal">일터의 경험을 자세히 들여다보면 두 종류가 있다.</p>
+      <p class="reveal">하나는 회사 안에서만 가치 있는 경험. 다른 하나는 회사를 떠나도 계속 나의 이름으로 남는 경험.</p>
+      <p class="muted reveal">전문성, 신뢰, 관계, 콘텐츠, 문제 해결 방식, 그리고 사람들에게 기억되는 나만의 기준. 이런 것들은 직장을 떠나도 함께 움직인다.</p>
+      <p class="coin reveal">나는 이것을 <span class="term">독립자본</span>이라고 부른다. 이 사이트는 그것을 쌓는 장치다.</p>
+    </div>
+    <p class="sig reveal">기록 <b class="num">{{ len $posts }}</b> · 연재 <b class="num">{{ len .Site.Taxonomies.series }}</b> · since 2026</p>
+  </div>
+</section>
+
+<section class="band">
+  <div class="wrap band-in">
+    <p class="sec-label reveal">무엇을 쌓나 <span class="sub">— 세 갈래의 기록</span></p>
+    <div class="cat-cards">
+      {{ range hugo.Data.categories }}
+      {{ $count := len (where $posts "Params.categories" "intersect" (slice .name)) }}
+      <a class="cat-card reveal" href="{{ "categories/" | absURL }}{{ .name | urlize }}/">
+        <div class="cc-head"><span class="cc-name">{{ .name }}</span><span class="cc-n num">{{ $count }}</span></div>
+        <p class="cc-desc">{{ .desc }}</p>
+        <span class="cc-go">모아보기 →</span>
+      </a>
+      {{ end }}
+    </div>
+  </div>
+</section>
+
+<section class="feed-o">
+  {{ $pinned := where $posts "Params.pinned" true }}
+  {{ with $pinned }}
+  {{ $p := index . 0 }}
+  <div class="wrap feed">
+    <p class="sec-label reveal">대표글 <span class="sub">— 상단 고정</span></p>
+    <article class="feature reveal">
+      <div class="casebadge">노트<b class="num">{{ $p.Params.episode | default "01" }}</b></div>
+      <div>
+        <h2><a href="{{ $p.Permalink }}">{{ $p.Title }}</a></h2>
+        {{ with or $p.Params.summary $p.Summary }}<p class="dek">{{ . | plainify }}</p>{{ end }}
+        <div class="meta"><span class="pin">대표글 · 고정</span>{{ with $p.Params.series }}<span>{{ index . 0 }}</span>{{ end }}<span class="num">{{ $p.Date.Format "1월 2일" }}</span></div>
+      </div>
+    </article>
+  </div>
   {{ end }}
-</ul>
-{{ end }}
-{{ with .Site.Taxonomies.series }}
-<h2>연재</h2>
-<ul class="post-list">
-  {{ range $name, $taxonomy := . }}
-  <li><a href="{{ "series/" | absURL }}{{ $name | urlize }}/">{{ $taxonomy.Page.Title }}</a><span class="date">{{ $taxonomy.Count }}편</span></li>
+
+  {{ $rest := where $posts "Params.pinned" "!=" true }}
+  {{ with $rest }}
+  <div class="wrap latest">
+    <p class="sec-label reveal">최신 기록 <span class="sub">— 세 갈래를 시간순으로</span></p>
+    <div class="list">
+      {{ range first 8 . }}
+      {{ $cat := "" }}{{ with .Params.categories }}{{ $cat = index . 0 }}{{ end }}
+      <article class="item{{ if eq $cat "생각" }} essay{{ end }} reveal">
+        <div class="tag{{ if eq $cat "인사이트 노트" }} note{{ end }}">{{ with $cat }}{{ . }}{{ else }}글{{ end }}</div>
+        <div class="body">
+          <h3><a href="{{ .Permalink }}">{{ .Title }}</a></h3>
+          {{ with or .Params.summary .Summary }}<p>{{ . | plainify }}</p>{{ end }}
+        </div>
+        <div class="date">{{ .Date.Format "1월 2일" }}</div>
+      </article>
+      {{ end }}
+    </div>
+    <p class="more reveal"><a href="{{ "posts/" | absURL }}">전체 기록 <span class="num">{{ len $posts }}</span>편 →</a></p>
+  </div>
   {{ end }}
-</ul>
-{{ end }}
+</section>
 {{ end }}

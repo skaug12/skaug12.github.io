@@ -68,10 +68,16 @@ def build_post(fm: dict, body: str) -> str:
         f"date: {pub_date}",
         f"lastmod: {today}",
     ]
+    if fm.get("category"):
+        lines.append(f'categories: ["{fm["category"]}"]')
     if fm.get("series"):
         lines.append(f'series: ["{fm["series"]}"]')
     if fm.get("summary"):
         lines.append(f'summary: "{fm["summary"]}"')
+    if fm.get("pinned", "").lower() in ("true", "yes", "1"):
+        lines.append("pinned: true")
+    if fm.get("episode"):
+        lines.append(f'episode: "{fm["episode"]}"')
     lines += ["---", "", body.strip(), ""]
     return "\n".join(lines)
 
@@ -126,7 +132,13 @@ def deploy():
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--go", action="store_true", help="실제 발행 (기본은 dry-run)")
+    ap.add_argument("--deploy", action="store_true", help="글 발행 없이 현재 상태로 빌드+gh-pages 배포만")
     args = ap.parse_args()
+
+    if args.deploy:
+        deploy()
+        print(f"배포 완료 → {BASE_URL}/")
+        return
 
     targets = find_targets()
     if not targets:

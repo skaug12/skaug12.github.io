@@ -1,9 +1,14 @@
-<header class="site">
-  <a class="brand" href="{{ "" | absURL }}">{{ .Site.Title }}</a>
-  <nav>
-    <a href="{{ "posts/" | absURL }}">글</a>
-    <a href="{{ "series/" | absURL }}">연재</a>
-    <a href="{{ "about/" | absURL }}">소개</a>
-    <a href="{{ "index.xml" | absURL }}">RSS</a>
-  </nav>
+<header class="masthead-o">
+  <div class="masthead">
+    <a class="mark" href="{{ "" | absURL }}"><b>seulki</b>.log</a>
+    <div class="controls">
+      <a class="navlink" href="{{ "about/" | absURL }}">소개</a>
+      <div class="fs" role="group" aria-label="글자 크기">
+        <button class="a1" data-fs=".92" type="button" aria-label="작게">A</button>
+        <button class="a2 on" data-fs="1" type="button" aria-label="보통">A</button>
+        <button class="a3" data-fs="1.12" type="button" aria-label="크게">A</button>
+      </div>
+      <button class="theme" id="theme" type="button" aria-label="라이트/다크 전환">Dark</button>
+    </div>
+  </div>
 </header>

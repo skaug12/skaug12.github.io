@@ -1,14 +1,21 @@
 {{ define "main" }}
-<article>
-  <h1>{{ .Title }}</h1>
-  <p class="meta">
-    {{ .Date.Format "2006년 1월 2일" }}{{ if ne (.Lastmod.Format "2006-01-02") (.Date.Format "2006-01-02") }} · 마지막 수정 {{ .Lastmod.Format "2006년 1월 2일" }}{{ end }}{{ with .Params.series }}{{ range . }} · <a href="{{ "series/" | absURL }}{{ . | urlize }}/">{{ . }}</a>{{ end }}{{ end }}
-  </p>
-  {{ .Content }}
-</article>
-{{ if eq .Section "posts" }}
-<div class="author-box">
-  <p><span class="name">{{ .Site.Params.author }}</span> · 커뮤니티를 11년째 운영하며 AI로 운영 업무를 자동화합니다. 이 블로그는 그 과정에서 실제로 있었던 사건과 판단을 기록합니다. <a href="{{ "about/" | absURL }}">더 알아보기</a></p>
+<div class="wrap">
+  <article class="post">
+    <h1 class="h1">{{ .Title }}</h1>
+    {{ if eq .Section "posts" }}
+    <p class="post-meta">
+      <span class="num">{{ .Date.Format "2006년 1월 2일" }}</span>
+      {{ if ne (.Lastmod.Format "2006-01-02") (.Date.Format "2006-01-02") }}<span>수정 {{ .Lastmod.Format "1월 2일" }}</span>{{ end }}
+      {{ with .Params.categories }}{{ range . }}<a href="{{ "categories/" | absURL }}{{ . | urlize }}/">{{ . }}</a>{{ end }}{{ end }}
+      {{ with .Params.series }}{{ range . }}<a href="{{ "series/" | absURL }}{{ . | urlize }}/">{{ . }}</a>{{ end }}{{ end }}
+    </p>
+    {{ end }}
+    <div class="post-content">{{ .Content }}</div>
+  </article>
+  {{ if eq .Section "posts" }}
+  <div class="author-box">
+    <p><span class="name">{{ .Site.Params.author }}</span> · 커뮤니티를 11년째 운영하며 AI로 운영 업무를 자동화합니다. 이 블로그는 그 과정의 실제 기록입니다. <a href="{{ "about/" | absURL }}">더 알아보기</a></p>
+  </div>
+  {{ end }}
 </div>
-{{ end }}
 {{ end }}

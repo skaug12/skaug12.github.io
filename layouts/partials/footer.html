@@ -1,3 +1,11 @@
 <footer class="site">
-  <p>© {{ now.Year }} {{ .Site.Params.author }} · <a href="{{ "llms.txt" | absURL }}">llms.txt</a> · <a href="{{ "sitemap.xml" | absURL }}">sitemap</a></p>
+  <div class="wrap footin">
+    <p class="footnote">회사를 떠나도 내 이름으로 남는 것만 여기 쌓는다. 이것이 <span class="term">독립자본</span>.</p>
+    <div class="colo">
+      <b>seulki.log</b><br>
+      {{ .Site.Params.author }} · 커뮤니티 오퍼레이터<br>
+      기록 · 인사이트 노트 · 에세이<br>
+      <a href="{{ "about/" | absURL }}">소개</a> · <a href="{{ "index.xml" | absURL }}">RSS</a> · <a href="{{ "llms.txt" | absURL }}">llms.txt</a> · © {{ now.Year }}
+    </div>
+  </div>
 </footer>

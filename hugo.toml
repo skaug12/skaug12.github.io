@@ -12,6 +12,7 @@ enableRobotsTXT = false # static/robots.txt를 그대로 사용
 
 [taxonomies]
   series = "series"
+  category = "categories"
 
 [permalinks]
   posts = "/posts/:slug/"
