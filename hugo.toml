@@ -2,6 +2,7 @@ baseURL = "https://skaug12.github.io/"
 languageCode = "ko-kr"
 title = "Seulki.log"
 timeZone = "Asia/Seoul"
+hasCJKLanguage = true   # 한국어 단어 수 정확히 세기 (축적 막대 높이·읽는 시간용)
 enableRobotsTXT = false # static/robots.txt를 그대로 사용
 
 [params]

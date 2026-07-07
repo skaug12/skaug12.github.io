@@ -10,7 +10,20 @@
       <p class="muted reveal">전문성, 신뢰, 관계, 콘텐츠, 문제 해결 방식, 그리고 사람들에게 기억되는 나만의 기준. 이런 것들은 직장을 떠나도 함께 움직인다.</p>
       <p class="coin reveal">나는 이것을 <span class="term">독립자본</span>이라고 부른다. 이 사이트는 그것을 쌓는 장치다.</p>
     </div>
-    <p class="sig reveal">기록 <b class="num">{{ len $posts }}</b> · 연재 <b class="num">{{ len .Site.Taxonomies.series }}</b> · since 2026</p>
+    <div class="accum reveal">
+      <div class="accum-track" aria-label="쌓인 글 축적 그래프">
+        {{ if $posts }}
+        {{ range (sort $posts "Date") }}
+        {{ $cat := "" }}{{ with .Params.categories }}{{ $cat = index . 0 }}{{ end }}
+        {{ $h := add 9 (div .WordCount 12) }}{{ if gt $h 46 }}{{ $h = 46 }}{{ end }}
+        <a class="tick {{ if eq $cat "생각" }}t-essay{{ else if eq $cat "개인 자동화" }}t-auto{{ else }}t-note{{ end }}" style="height:{{ $h }}px" href="{{ .Permalink }}" title="{{ .Title }} · {{ .WordCount }}자"></a>
+        {{ end }}
+        {{ else }}
+        <span class="accum-empty">첫 기록을 기다리는 중</span>
+        {{ end }}
+      </div>
+      <p class="accum-cap">쌓은 기록 <b class="num">{{ len $posts }}</b>편 · 연재 <b class="num">{{ len .Site.Taxonomies.series }}</b> · 막대 하나가 글 하나, 높이는 글의 길이 · since 2026</p>
+    </div>
   </div>
 </section>
 

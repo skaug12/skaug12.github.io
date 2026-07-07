@@ -115,6 +115,19 @@ section { transition: background .4s ease; }
 .sig { margin-top: 2.5rem; font-size: .8rem; font-weight: 450; color: var(--ink-faint); }
 .sig b { color: var(--ink); font-weight: 600; }
 
+/* 축적 그래프 — 글마다 막대 하나, 높이는 글 길이, 색은 카테고리 */
+.accum { margin-top: 2.6rem; max-width: 40rem; }
+.accum-track { display: flex; align-items: flex-end; gap: 3px; min-height: 46px;
+  padding-bottom: .55rem; border-bottom: 1px solid var(--line); overflow-x: auto; }
+.accum-track .tick { flex: 0 0 auto; width: 6px; min-height: 6px; border-radius: 2px 2px 0 0;
+  background: var(--accent); opacity: .9; transition: transform .2s ease, opacity .2s ease; }
+.accum-track .tick:hover { opacity: 1; transform: scaleY(1.12); }
+.accum-track .tick.t-essay { background: var(--ink-faint); opacity: .7; }
+.accum-track .tick.t-auto { background: var(--accent); opacity: .45; }
+.accum-empty { font-size: .82rem; color: var(--ink-faint); align-self: center; }
+.accum-cap { font-size: .8rem; font-weight: 450; color: var(--ink-faint); margin: .85rem 0 0; }
+.accum-cap b { color: var(--ink); font-weight: 600; }
+
 .reveal { opacity: 1; }                                   /* no-JS fallback: 보이게 */
 html.js .reveal { opacity: 0; transform: translateY(14px); }
 html.js .reveal.in { opacity: 1; transform: none; transition: opacity .8s ease, transform .8s cubic-bezier(.2,.7,.2,1); }
