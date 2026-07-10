@@ -3,7 +3,7 @@
 
 기본 실행은 dry-run: 발행 대상만 보여준다. 실제 발행은 --go.
 
-흐름: Memo/콘텐츠파이프라인/블로그/ 안의 md 중 frontmatter `status: publish`인 글을
+흐름: Memo/3 콘텐츠/블로그/ 안의 md 중 frontmatter `status: publish`인 글을
 content/posts/{slug}.md로 변환·복사 → main 커밋·푸시 → 로컬 hugo 빌드 →
 public/을 gh-pages 브랜치로 강제 푸시 → 라이브 URL 검증
 → 성공 시 원본 frontmatter를 status: published + posted_url로 갱신.
@@ -24,7 +24,7 @@ import urllib.request
 from pathlib import Path
 from datetime import date
 
-VAULT = Path.home() / "Library/Mobile Documents/iCloud~md~obsidian/Documents/Memo/콘텐츠파이프라인/블로그"
+VAULT = Path.home() / "Library/Mobile Documents/iCloud~md~obsidian/Documents/Memo/3 콘텐츠/블로그"
 REPO = Path(__file__).resolve().parent.parent
 CONTENT = REPO / "content" / "posts"
 PUBLIC = REPO / "public"

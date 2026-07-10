@@ -8,7 +8,7 @@
 
 ## 글쓰기 → 발행
 
-1. 옵시디언 `Memo/콘텐츠파이프라인/블로그/`에 글 작성 (frontmatter: title·slug·date·series·summary·status)
+1. 옵시디언 `Memo/3 콘텐츠/블로그/`에 글 작성 (frontmatter: title·slug·date·series·summary·status)
 2. 다 쓰면 frontmatter `status: draft` → `publish`로 변경
 3. `python3 scripts/publish.py` (dry-run 확인) → `python3 scripts/publish.py --go`
 4. 스크립트가 변환 → main 푸시 → hugo 빌드 → gh-pages 배포 → 라이브 검증 → 원본에 posted_url 기록
