@@ -80,10 +80,10 @@ img { max-width: 100%; height: auto; }
 
 /* ── 왼쪽 위: 정체성 · 메뉴 (여백 넉넉, 좌상단) ── */
 .rail { padding: 2.7rem 1.8rem 1.2rem; display: flex; flex-direction: column; gap: 1.7rem; }
-.rail .mark { font-size: 1rem; font-weight: 700; letter-spacing: -.02em; color: var(--ink); }
-.rail .desc { font-size: .8rem; line-height: 1.7; color: var(--ink-soft); margin: 0; max-width: 15rem; }
-.rail-nav { display: flex; flex-direction: column; gap: .3rem; font-size: .86rem; line-height: 1.2; }
-.rail-nav .grp { font-size: .68rem; letter-spacing: .08em; color: var(--ink-faint);
+.rail .mark { font-size: .83rem; font-weight: 700; letter-spacing: -.02em; color: var(--ink); }
+.rail .desc { font-size: .83rem; line-height: 1.7; color: var(--ink-soft); margin: 0; max-width: 15rem; }
+.rail-nav { display: flex; flex-direction: column; gap: .3rem; font-size: .83rem; line-height: 1.2; }
+.rail-nav .grp { font-size: .83rem; letter-spacing: .08em; color: var(--ink-faint);
   text-transform: uppercase; margin: .95rem 0 .2rem; }
 .rail-nav a { color: var(--ink-soft); width: max-content; line-height: 1.2; padding: .05rem 0; }
 .rail-nav a:hover { color: var(--ink); text-decoration: underline; text-underline-offset: 3px; }
@@ -98,7 +98,7 @@ img { max-width: 100%; height: auto; }
 .rail-foot { margin-top: auto; display: flex; flex-direction: column; gap: 1.2rem;
   font-size: .72rem; color: var(--ink-faint); padding-top: 2.4rem; }
 .rail-connect .theme { align-self: flex-start; border: 1px solid var(--line); color: var(--ink-soft);
-  padding: .3rem .7rem; }
+  padding: .3rem .7rem; font-size: .83rem; }
 .rail-connect .theme:hover { border-color: var(--ink); color: var(--ink); }
 
 /* ── 가운데: 글 제목 목록 (한 줄: 카테고리 · 제목 · 업로드일) ── */
@@ -118,7 +118,7 @@ img { max-width: 100%; height: auto; }
 .reader { padding: 2.7rem clamp(1.6rem,3vw,3.6rem) 4rem; }
 .panel { display: none; max-width: 36rem; }
 .panel.active { display: block; }
-.panel > h1 { font-size: calc(1.55rem * var(--reader)); font-weight: 700; line-height: 1.32;
+.panel > h1 { font-size: calc(1.08rem * var(--reader)); font-weight: 700; line-height: 1.32;
   letter-spacing: -.03em; margin: 0 0 .85rem; text-wrap: balance; }
 .panel > .meta { font-size: .72rem; color: var(--ink-faint); display: flex; gap: .85rem;
   flex-wrap: wrap; align-items: center; margin: 0 0 2rem; padding-bottom: 1.3rem;
@@ -175,7 +175,7 @@ img { max-width: 100%; height: auto; }
    글 페이지 (single) & 목록/분류 헤더
    ============================================================ */
 .post { padding-top: clamp(2.4rem,6vw,3.6rem); padding-bottom: 1rem; }
-.post .h1 { font-size: calc(1.55rem * var(--reader)); font-weight: 700;
+.post .h1 { font-size: calc(1.08rem * var(--reader)); font-weight: 700;
   line-height: 1.35; margin: 0 0 .9rem; text-wrap: balance; letter-spacing: -0.025em; }
 .post .post-meta { font-size: .72rem; font-weight: 450; color: var(--ink-faint);
   margin: 0 0 2.2rem; display: flex; gap: .9rem; flex-wrap: wrap; align-items: center; }
@@ -232,7 +232,8 @@ footer.site { border-top: 1px solid var(--line); margin-top: 0; }
   text-decoration: underline; text-underline-offset: 2px; }
 .colo { font-size: .74rem; color: var(--ink-faint); text-align: left; margin: 0; }
 .rail-foot .author-bio { gap: .55rem; }
-.rail-foot .author-bio p, .rail-foot .author-bio a { font-size: .74rem; }
+.rail-foot .author-bio p, .rail-foot .author-bio a { font-size: .83rem; }
+.rail-foot .colo { font-size: .83rem; }
 
 /* ---- 메일 팝업(모달) ---- */
 .mail-modal { border: 1px solid var(--ink); border-radius: 0; background: var(--paper); color: var(--ink);
@@ -277,7 +278,7 @@ footer.site { border-top: 1px solid var(--line); margin-top: 0; }
 .contact-in { display: flex; flex-direction: column; align-items: flex-start; gap: .8rem; }
 .contact-in .connect-form { width: 100%; max-width: 30rem; }
 /* 인스타 DM · 메일 보내기: 버튼 없이 글씨만 (밑줄 텍스트) */
-.c-ig, .c-mail-toggle { font: inherit; font-size: .9rem; font-weight: 600; color: var(--ink);
+.c-ig, .c-mail-toggle { font: inherit; font-size: .83rem; font-weight: 600; color: var(--ink);
   background: none; border: 0; padding: 0; cursor: pointer;
   text-decoration: underline; text-underline-offset: 3px; text-decoration-color: var(--line); }
 .c-ig:hover, .c-mail-toggle:hover { text-decoration-color: var(--ink); }
