@@ -95,8 +95,8 @@ img { max-width: 100%; height: auto; }
 .rc-in .connect-form input, .rc-in .connect-form textarea { font-size: .82rem; padding: .5rem .6rem; }
 .rc-in .connect-form textarea { min-height: 3.4rem; }
 .rc-in .cf-send { font-size: .82rem; padding: .5rem 1rem; width: max-content; }
-.rail-foot { margin-top: auto; display: flex; flex-direction: column; gap: .6rem;
-  font-size: .72rem; color: var(--ink-faint); padding-top: 1.6rem; }
+.rail-foot { margin-top: auto; display: flex; flex-direction: column; gap: 1.2rem;
+  font-size: .72rem; color: var(--ink-faint); padding-top: 2.4rem; }
 .rail-connect .theme { align-self: flex-start; border: 1px solid var(--line); color: var(--ink-soft);
   padding: .3rem .7rem; }
 .rail-connect .theme:hover { border-color: var(--ink); color: var(--ink); }
@@ -104,7 +104,7 @@ img { max-width: 100%; height: auto; }
 /* ── 가운데: 글 제목 목록 (한 줄: 카테고리 · 제목 · 업로드일) ── */
 .index { padding: 2.4rem 0 3rem; }
 .ix-item { display: grid; grid-template-columns: 5.5rem 1fr auto; gap: 0 .9rem; align-items: baseline;
-  text-align: left; border-top: 1px solid var(--line-soft); padding: 1rem 1.8rem; }
+  text-align: left; border-top: 1px solid var(--line-soft); padding: .55rem 1.8rem; }
 .ix-item:first-of-type { border-top: none; }
 .ix-item:hover { background: var(--card); }
 .ix-item.active { background: var(--band); }
@@ -185,9 +185,9 @@ img { max-width: 100%; height: auto; }
 
 .post-content { font-size: calc(.92rem * var(--reader)); line-height: 1.9; color: var(--ink); }
 .post-content > * + * { margin-top: 1.25em; }
-.post-content h2 { font-size: calc(1.08rem * var(--reader)); font-weight: 700; line-height: 1.4;
+.post-content h2 { font-size: calc(.92rem * var(--reader)); font-weight: 700; line-height: 1.4;
   margin-top: 2.4em; margin-bottom: .2em; letter-spacing: -0.02em; }
-.post-content h3 { font-size: calc(.98rem * var(--reader)); font-weight: 700; margin-top: 1.8em; margin-bottom: .1em; }
+.post-content h3 { font-size: calc(.92rem * var(--reader)); font-weight: 700; margin-top: 1.8em; margin-bottom: .1em; }
 .post-content p { margin: 0; }
 .post-content a { text-decoration: underline; text-underline-offset: 2px; text-decoration-color: var(--line); }
 .post-content a:hover { text-decoration-color: var(--ink); }
@@ -231,6 +231,7 @@ footer.site { border-top: 1px solid var(--line); margin-top: 0; }
 .author-bio a { width: max-content; font-size: .78rem; color: var(--ink);
   text-decoration: underline; text-underline-offset: 2px; }
 .colo { font-size: .74rem; color: var(--ink-faint); text-align: left; margin: 0; }
+.rail-foot .author-bio { gap: .55rem; }
 .rail-foot .author-bio p, .rail-foot .author-bio a { font-size: .74rem; }
 
 /* ---- 메일 팝업(모달) ---- */
@@ -272,7 +273,7 @@ footer.site { border-top: 1px solid var(--line); margin-top: 0; }
 }
 
 /* ---- 컨택트 (홈 왼쪽열 아래 · 글 페이지 아래 공통) — 글씨만, 각진 ---- */
-.contact { margin-top: clamp(2rem, 5vw, 3rem); padding: 0; }
+.contact { margin-top: clamp(2rem, 5vw, 3rem); padding: 0 0 clamp(2.2rem, 5vw, 3.2rem); }
 .contact-in { display: flex; flex-direction: column; align-items: flex-start; gap: .8rem; }
 .contact-in .connect-form { width: 100%; max-width: 30rem; }
 /* 인스타 DM · 메일 보내기: 버튼 없이 글씨만 (밑줄 텍스트) */
