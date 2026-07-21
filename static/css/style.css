@@ -274,7 +274,7 @@ footer.site { border-top: 1px solid var(--line); margin-top: clamp(3.2rem,7vw,5r
   padding: clamp(2.6rem, 6vw, 4rem) 0;
 }
 .connect-in { display: grid; grid-template-columns: 1fr; gap: clamp(1.8rem, 5vw, 4rem); align-items: start; }
-.connect-in.has-form { grid-template-columns: 1fr 1fr; }
+.connect-in.has-form { grid-template-columns: 1fr; }   /* 항상 1열 (2열 금지) */
 .connect-kicker { font-size: .82rem; font-weight: 700; text-transform: uppercase; letter-spacing: .04em;
   color: var(--ink-faint); margin: 0 0 .7rem; }
 .connect-kicker .dot { color: var(--ink-faint); }
@@ -289,7 +289,7 @@ footer.site { border-top: 1px solid var(--line); margin-top: clamp(3.2rem,7vw,5r
 .connect-ig .ig-at { font-weight: 450; opacity: .82; }
 
 .connect-form { display: flex; flex-direction: column; gap: .9rem; }
-.cf-row { display: flex; gap: .9rem; }
+.cf-row { display: flex; flex-direction: column; gap: .9rem; }   /* 이름·이메일도 세로 1열 */
 .cf-row .cf-field { flex: 1; }
 .cf-field { display: flex; flex-direction: column; gap: .35rem; }
 .cf-label { font-size: .8rem; font-weight: 550; color: var(--ink-soft); }
