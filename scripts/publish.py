@@ -28,7 +28,7 @@ VAULT = Path.home() / "Library/Mobile Documents/iCloud~md~obsidian/Documents/Mem
 REPO = Path(__file__).resolve().parent.parent
 CONTENT = REPO / "content" / "posts"
 PUBLIC = REPO / "public"
-BASE_URL = "https://skaug12.github.io"  # 도메인 연결 시 여기와 hugo.toml baseURL을 함께 수정
+BASE_URL = "https://seulkilog.today"  # 도메인 연결 시 여기와 hugo.toml baseURL을 함께 수정
 REMOTE = "https://github.com/skaug12/skaug12.github.io.git"
 HUGO = shutil.which("hugo") or "/opt/homebrew/bin/hugo"
 
