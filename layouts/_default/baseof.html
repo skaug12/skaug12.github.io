@@ -1,11 +1,15 @@
 <!DOCTYPE html>
 <html lang="ko">
 {{ partial "head.html" . }}
-<body>
+<body{{ if .IsHome }} class="home"{{ end }}>
+{{- if .IsHome }}
+  {{ block "main" . }}{{ end }}
+{{- else }}
   {{ partial "header.html" . }}
   <main>{{ block "main" . }}{{ end }}</main>
   {{ partial "connect.html" . }}
   {{ partial "footer.html" . }}
+{{- end }}
   <script src="{{ "js/site.js" | absURL }}"></script>
 </body>
 </html>
