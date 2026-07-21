@@ -13,13 +13,5 @@
     <div class="post-content">{{ .Content }}</div>
   </article>
   {{ partial "reactions.html" . }}
-  {{ if eq .Section "posts" }}
-  <div class="author-box">
-    <p><span class="name">{{ .Site.Params.author }}</span> · 커뮤니티를 11년째 운영하며 AI로 운영 업무를 자동화합니다. 이 블로그는 그 과정의 실제 기록입니다. <a href="{{ "about/" | absURL }}">더 알아보기</a></p>
-    {{ with .Site.Params.instagram }}
-    <p class="author-ig"><a href="https://ig.me/m/{{ . }}" target="_blank" rel="noopener noreferrer">이 글에 대한 생각, 인스타그램 DM으로 →</a></p>
-    {{ end }}
-  </div>
-  {{ end }}
 </div>
 {{ end }}

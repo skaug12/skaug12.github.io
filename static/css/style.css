@@ -82,23 +82,18 @@ img { max-width: 100%; height: auto; }
 .rail { padding: 2.7rem 1.8rem 1.2rem; display: flex; flex-direction: column; gap: 1.7rem; }
 .rail .mark { font-size: 1rem; font-weight: 700; letter-spacing: -.02em; color: var(--ink); }
 .rail .desc { font-size: .8rem; line-height: 1.7; color: var(--ink-soft); margin: 0; max-width: 15rem; }
-.rail-nav { display: flex; flex-direction: column; gap: .7rem; font-size: .86rem; }
+.rail-nav { display: flex; flex-direction: column; gap: .3rem; font-size: .86rem; line-height: 1.2; }
 .rail-nav .grp { font-size: .68rem; letter-spacing: .08em; color: var(--ink-faint);
-  text-transform: uppercase; margin: .85rem 0 .1rem; }
-.rail-nav a { color: var(--ink-soft); width: max-content; }
+  text-transform: uppercase; margin: .95rem 0 .2rem; }
+.rail-nav a { color: var(--ink-soft); width: max-content; line-height: 1.2; padding: .05rem 0; }
 .rail-nav a:hover { color: var(--ink); text-decoration: underline; text-underline-offset: 3px; }
 
 /* ── 왼쪽 아래: 연결하기 (인스타 DM + 메일) ── */
 .rail-connect { padding: 1.2rem 1.8rem 2rem; gap: 1.4rem; }
-.rc-in { display: flex; flex-direction: column; gap: .9rem; }
-.rc-h { font-size: .7rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase;
-  color: var(--ink-faint); margin: 0; }
-.ig { display: inline-block; border: 1px solid var(--ink); color: var(--ink); font-weight: 600;
-  font-size: .82rem; padding: .55rem .9rem; width: max-content; }
-.ig:hover { background: var(--ink); color: var(--paper); }
-.rc-in .connect-form { gap: .55rem; }
+.rc-in { display: flex; flex-direction: column; align-items: flex-start; gap: .7rem; }
+.rc-in .connect-form { width: 100%; gap: .55rem; margin-top: .2rem; }
 .rc-in .connect-form input, .rc-in .connect-form textarea { font-size: .82rem; padding: .5rem .6rem; }
-.rc-in .connect-form textarea { min-height: 3.6rem; }
+.rc-in .connect-form textarea { min-height: 3.4rem; }
 .rc-in .cf-send { font-size: .82rem; padding: .5rem 1rem; width: max-content; }
 .rail-foot { margin-top: auto; display: flex; flex-direction: column; gap: .6rem;
   font-size: .72rem; color: var(--ink-faint); padding-top: 1.6rem; }
@@ -106,19 +101,18 @@ img { max-width: 100%; height: auto; }
   padding: .3rem .7rem; }
 .rail-connect .theme:hover { border-color: var(--ink); color: var(--ink); }
 
-/* ── 가운데: 글 제목 목록 ── */
-.index { padding: 2.7rem 0 3rem; }
-.index .year { padding: 0 1.8rem; margin: 0 0 .4rem; }
-.ix-item { display: block; text-align: left; border-top: 1px solid var(--line-soft);
-  padding: 1.15rem 1.8rem; }
+/* ── 가운데: 글 제목 목록 (한 줄: 카테고리 · 제목 · 업로드일) ── */
+.index { padding: 2.4rem 0 3rem; }
+.ix-item { display: grid; grid-template-columns: 5.5rem 1fr auto; gap: 0 .9rem; align-items: baseline;
+  text-align: left; border-top: 1px solid var(--line-soft); padding: 1rem 1.8rem; }
 .ix-item:first-of-type { border-top: none; }
 .ix-item:hover { background: var(--card); }
 .ix-item.active { background: var(--band); }
-.ix-item .d { font-size: .74rem; color: var(--ink-faint); }
-.ix-item .t { display: block; margin: .25rem 0 .32rem; font-size: 1.02rem; font-weight: 600;
-  line-height: 1.4; letter-spacing: -.02em; color: var(--ink); text-wrap: balance; }
+.ix-item .c { font-size: .74rem; font-weight: 600; color: var(--ink-faint); }
+.ix-item .t { font-size: 1.02rem; font-weight: 600; line-height: 1.2; letter-spacing: -.02em; color: var(--ink); }
 .ix-item.active .t { font-weight: 700; text-decoration: underline; text-underline-offset: 3px; }
-.ix-item .c { font-size: .72rem; font-weight: 600; color: var(--ink-faint); }
+.ix-item .d { font-size: .74rem; color: var(--ink-faint); font-variant-numeric: tabular-nums;
+  white-space: nowrap; text-align: right; }
 
 /* ── 오른쪽: 글 내용 ── */
 .reader { padding: 2.7rem clamp(1.6rem,3vw,3.6rem) 4rem; }
@@ -228,17 +222,10 @@ img { max-width: 100%; height: auto; }
 .page-head h1 { font-size: calc(clamp(1.4rem,3vw,1.8rem) * var(--reader)); font-weight: 700; margin: 0 0 .5rem; letter-spacing: -0.02em; }
 .page-head .lede { color: var(--ink-soft); margin: 0; }
 
-/* ---- footer ---- */
-footer.site { border-top: 1px solid var(--line); margin-top: clamp(3.2rem,7vw,5rem); }
-.footin { padding-top: 2.6rem; padding-bottom: 3.4rem; display: flex; justify-content: space-between;
-  gap: 2rem; flex-wrap: wrap; align-items: end; }
-.footnote { font-size: 1rem; font-weight: 400; color: var(--ink-soft);
-  max-width: 24rem; line-height: 1.8; margin: 0; }
-.footnote .term { font-weight: 700; font-size: .95em; }
-.colo { font-size: .8rem; font-weight: 450; color: var(--ink-faint); text-align: right; line-height: 1.95; }
-.colo b { color: var(--ink-soft); font-weight: 700; }
-.colo a { color: var(--ink-faint); }
-.colo a:hover { color: var(--ink); text-decoration: underline; }
+/* ---- footer (저작권만, 컨택트 영역에 바로 붙게) ---- */
+footer.site { border-top: 1px solid var(--line); margin-top: 0; }
+.footin { padding: 1.4rem 0 3rem; }
+.colo { font-size: .8rem; color: var(--ink-faint); text-align: left; margin: 0; }
 
 /* ---- reactions bar (조회 · 좋아요 · 공유) — 각진 ---- */
 .reactions {
@@ -266,27 +253,15 @@ footer.site { border-top: 1px solid var(--line); margin-top: clamp(3.2rem,7vw,5r
   .react-share-group { margin-left: 0; }
 }
 
-/* ---- connect strip (비홈 페이지 하단: 인스타 DM + 컨택트 폼) — 각진 ---- */
-.connect {
-  border-top: 1px solid var(--line);
-  background: var(--band);
-  margin-top: clamp(3.2rem, 7vw, 5rem);
-  padding: clamp(2.6rem, 6vw, 4rem) 0;
-}
-.connect-in { display: grid; grid-template-columns: 1fr; gap: clamp(1.8rem, 5vw, 4rem); align-items: start; }
-.connect-in.has-form { grid-template-columns: 1fr; }   /* 항상 1열 (2열 금지) */
-.connect-kicker { font-size: .82rem; font-weight: 700; text-transform: uppercase; letter-spacing: .04em;
-  color: var(--ink-faint); margin: 0 0 .7rem; }
-.connect-kicker .dot { color: var(--ink-faint); }
-.connect-h { font-size: clamp(1.35rem, 3.4vw, 1.85rem); font-weight: 700; letter-spacing: -0.02em;
-  margin: 0 0 .55rem; color: var(--ink); }
-.connect-sub { margin: 0 0 1.6rem; color: var(--ink-soft); max-width: 26rem; font-weight: 400; }
-.connect-ig { display: inline-flex; align-items: center; gap: .55rem;
-  background: var(--ink); color: var(--paper); border-radius: 0;
-  padding: .7rem 1.15rem; font-size: .95rem; font-weight: 600; transition: background .15s ease; }
-.connect-ig:hover { background: var(--accent); }
-.connect-ig .ig-ic { flex: none; }
-.connect-ig .ig-at { font-weight: 450; opacity: .82; }
+/* ---- 컨택트 (홈 왼쪽열 아래 · 글 페이지 아래 공통) — 글씨만, 각진 ---- */
+.contact { margin-top: clamp(2rem, 5vw, 3rem); padding: 0; }
+.contact-in { display: flex; flex-direction: column; align-items: flex-start; gap: .8rem; }
+.contact-in .connect-form { width: 100%; max-width: 30rem; }
+/* 인스타 DM · 메일 보내기: 버튼 없이 글씨만 (밑줄 텍스트) */
+.c-ig, .c-mail-toggle { font: inherit; font-size: .9rem; font-weight: 600; color: var(--ink);
+  background: none; border: 0; padding: 0; cursor: pointer;
+  text-decoration: underline; text-underline-offset: 3px; text-decoration-color: var(--line); }
+.c-ig:hover, .c-mail-toggle:hover { text-decoration-color: var(--ink); }
 
 .connect-form { display: flex; flex-direction: column; gap: .9rem; }
 .cf-row { display: flex; flex-direction: column; gap: .9rem; }   /* 이름·이메일도 세로 1열 */

@@ -109,4 +109,18 @@
         });
     });
   }
+
+  /* ---- 메일 보내기: 클릭하면 컨택 폼 펼침 ---- */
+  document.querySelectorAll('.c-mail-toggle').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var form = btn.parentNode.querySelector('.connect-form');
+      if (form) {
+        form.hidden = false;
+        btn.setAttribute('aria-expanded', 'true');
+        btn.hidden = true;
+        var first = form.querySelector('input, textarea');
+        if (first) first.focus();
+      }
+    });
+  });
 })();

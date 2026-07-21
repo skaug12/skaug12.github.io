@@ -8,26 +8,21 @@
     <p class="desc">{{ .Site.Params.description }}</p>
     <nav class="rail-nav" aria-label="사이트 메뉴">
       <a href="{{ "posts/" | absURL }}">글 전체</a>
-      <span class="grp">모아보기</span>
+      <span class="grp">Category</span>
       {{ range hugo.Data.categories }}<a href="{{ "categories/" | absURL }}{{ .name | urlize }}/">{{ .name }}</a>{{ end }}
-      <span class="grp">더</span>
+      <span class="grp">More</span>
       <a href="{{ "about/" | absURL }}">소개</a>
-      <a href="{{ "index.xml" | absURL }}">RSS</a>
-      <a href="{{ "llms.txt" | absURL }}">llms.txt</a>
     </nav>
   </aside>
 
   <nav class="index" aria-label="글 목록">
-    {{ range $posts.GroupByDate "2006" }}
-    <p class="year">{{ .Key }}</p>
-    {{ range .Pages.ByDate.Reverse }}
+    {{ range $posts.ByDate.Reverse }}
     {{ $cat := "" }}{{ with .Params.categories }}{{ $cat = index . 0 }}{{ end }}
     <a class="ix-item{{ if eq .Permalink $newest }} active{{ end }}" href="{{ .Permalink }}" data-id="{{ .Params.slug | default .File.ContentBaseName }}">
-      <span class="d num">{{ .Date.Format "1. 2" }}</span>
-      <span class="t">{{ .Title }}</span>
       <span class="c">{{ with $cat }}{{ . }}{{ else }}글{{ end }}</span>
+      <span class="t">{{ .Title }}</span>
+      <span class="d num">{{ .Date.Format "2006. 1. 2" }}</span>
     </a>
-    {{ end }}
     {{ end }}
   </nav>
 
@@ -39,28 +34,27 @@
       <p class="meta"><span class="num">{{ $p.Date.Format "2006년 1월 2일" }}</span>{{ with $cat }}<span>{{ . }}</span>{{ end }}{{ with $p.Params.series }}<span>{{ index . 0 }}</span>{{ end }}</p>
       <div class="post-content">{{ $p.Content }}</div>
       <p class="panel-open"><a href="{{ $p.Permalink }}">이 글 페이지 열기 · 반응 남기기 →</a></p>
-      <div class="author-box"><p><span class="name">{{ $.Site.Params.author }}</span> · 커뮤니티를 11년째 운영하며 AI로 운영 업무를 자동화합니다.</p></div>
     </article>
     {{ end }}
   </section>
 
   <aside class="rail-connect">
     <div class="rc-in">
-      <p class="rc-h">연결하기</p>
-      {{ with .Site.Params.instagram }}<a class="ig" href="https://ig.me/m/{{ . }}" target="_blank" rel="noopener noreferrer">인스타그램으로 DM 보내기 →</a>{{ end }}
+      {{ with .Site.Params.instagram }}<a class="c-ig" href="https://ig.me/m/{{ . }}" target="_blank" rel="noopener noreferrer">인스타그램으로 DM 보내기 →</a>{{ end }}
       {{ with .Site.Params.contact_form }}
-      <form class="connect-form" action="{{ . }}" method="POST" novalidate>
+      <button class="c-mail-toggle" type="button" aria-expanded="false">메일 보내기 →</button>
+      <form class="connect-form" action="{{ . }}" method="POST" novalidate hidden>
         <label class="cf-field"><span class="cf-label">이름</span><input type="text" name="{{ $.Site.Params.contact_name }}" autocomplete="name" required></label>
         <label class="cf-field"><span class="cf-label">이메일</span><input type="email" name="{{ $.Site.Params.contact_email }}" autocomplete="email" required></label>
         <label class="cf-field"><span class="cf-label">메시지</span><textarea name="{{ $.Site.Params.contact_message }}" rows="3" required></textarea></label>
         <input class="cf-hp" type="text" name="_hp" tabindex="-1" autocomplete="off" aria-hidden="true">
-        <div class="cf-foot"><button class="cf-send" type="submit">메일 보내기</button><p class="cf-status" role="status" aria-live="polite"></p></div>
+        <div class="cf-foot"><button class="cf-send" type="submit">보내기</button><p class="cf-status" role="status" aria-live="polite"></p></div>
       </form>
       {{ end }}
     </div>
     <div class="rail-foot">
       <button class="theme" id="theme" type="button" aria-label="라이트·다크 전환">Dark</button>
-      <span>since 2026 · {{ .Site.Params.author }}</span>
+      <span>© 2026 {{ .Site.Params.author }}</span>
     </div>
   </aside>
 
