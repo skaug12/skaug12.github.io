@@ -277,3 +277,102 @@ footer.site { border-top: 1px solid var(--line); margin-top: clamp(3.2rem,7vw,5r
   .kicker .caret { animation: none; }
   * { scroll-behavior: auto !important; }
 }
+
+/* ---- reactions bar (조회 · 좋아요 · 공유) ---- */
+.reactions {
+  display: flex; align-items: center; gap: .8rem; flex-wrap: wrap;
+  margin: 2.4rem 0 0; padding-top: 1.3rem;
+  border-top: 1px solid var(--line);
+  font-size: .9rem; color: var(--ink-soft);
+}
+.reactions .num { font-variant-numeric: tabular-nums; }
+.reactions button {
+  background: none; border: 1px solid var(--line); color: var(--ink-soft);
+  border-radius: 999px; padding: .3rem .75rem; cursor: pointer; font: inherit;
+  line-height: 1; display: inline-flex; align-items: center; gap: .4rem;
+  transition: border-color .15s, color .15s, background .15s;
+}
+.reactions button:hover { border-color: var(--accent); color: var(--accent); }
+.react-like .ic { font-size: 1.05rem; }
+.react-like.on { color: var(--accent); border-color: var(--accent); background: var(--accent-wash); }
+.react-views { color: var(--ink-faint); }
+.react-share-group { display: inline-flex; align-items: center; gap: .45rem; margin-left: auto; }
+.react-share-label { color: var(--ink-faint); }
+.react-share { padding: .22rem .6rem; font-size: .82rem; }
+.react-shares { color: var(--ink-faint); }
+@media (max-width: 560px) {
+  .react-share-group { margin-left: 0; }
+}
+
+/* ---- connect strip (인스타 DM CTA + 컨택트 폼) ---- */
+.connect {
+  border-top: 1px solid var(--line);
+  background: var(--band);
+  margin-top: clamp(3.2rem, 7vw, 5rem);
+  padding: clamp(2.6rem, 6vw, 4rem) 0;
+}
+.connect-in {
+  display: grid; grid-template-columns: 1fr; gap: clamp(1.8rem, 5vw, 4rem);
+  align-items: start;
+}
+.connect-in.has-form { grid-template-columns: 1fr 1fr; }
+.connect-kicker {
+  font-size: .82rem; font-weight: 600; text-transform: uppercase; letter-spacing: .04em;
+  color: var(--ink-faint); margin: 0 0 .7rem;
+}
+.connect-kicker .dot { color: var(--accent); }
+.connect-h {
+  font-size: clamp(1.35rem, 3.4vw, 1.85rem); font-weight: 700; letter-spacing: -0.02em;
+  margin: 0 0 .55rem; color: var(--ink);
+}
+.connect-sub { margin: 0 0 1.6rem; color: var(--ink-soft); max-width: 26rem; font-weight: 400; }
+.connect-ig {
+  display: inline-flex; align-items: center; gap: .55rem;
+  background: var(--accent); color: #fff; border-radius: 999px;
+  padding: .7rem 1.15rem; font-size: .95rem; font-weight: 600;
+  transition: transform .15s ease, background .15s ease;
+}
+.connect-ig:hover { transform: translateY(-1px); background: var(--accent-ink); color: #fff; }
+.connect-ig .ig-ic { flex: none; }
+.connect-ig .ig-at { font-weight: 450; opacity: .82; }
+/* 다크에서 accent가 밝아지므로 버튼 글자를 어둡게 뒤집어 대비 확보 */
+@media (prefers-color-scheme: dark) { .connect-ig, .connect-ig:hover { color: #0E120E; } }
+:root[data-theme="dark"] .connect-ig, :root[data-theme="dark"] .connect-ig:hover { color: #0E120E; }
+:root[data-theme="light"] .connect-ig, :root[data-theme="light"] .connect-ig:hover { color: #fff; }
+
+.connect-form { display: flex; flex-direction: column; gap: .9rem; }
+.cf-row { display: flex; gap: .9rem; }
+.cf-row .cf-field { flex: 1; }
+.cf-field { display: flex; flex-direction: column; gap: .35rem; }
+.cf-label { font-size: .8rem; font-weight: 550; color: var(--ink-soft); }
+.connect-form input[type="text"],
+.connect-form input[type="email"],
+.connect-form textarea {
+  font: inherit; font-size: .95rem; color: var(--ink);
+  background: var(--card); border: 1px solid var(--line); border-radius: 8px;
+  padding: .6rem .7rem; width: 100%;
+  transition: border-color .15s ease;
+}
+.connect-form textarea { resize: vertical; min-height: 5.5rem; line-height: 1.6; }
+.connect-form input:focus, .connect-form textarea:focus { outline: none; border-color: var(--accent); }
+.cf-hp { position: absolute !important; left: -9999px !important; width: 1px; height: 1px; opacity: 0; }
+.cf-foot { display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; }
+.cf-send {
+  font: inherit; font-weight: 600; font-size: .95rem; cursor: pointer;
+  background: var(--ink); color: var(--paper); border: none; border-radius: 999px;
+  padding: .65rem 1.4rem; transition: opacity .15s ease;
+}
+.cf-send:hover { opacity: .88; }
+.cf-send:disabled { opacity: .5; cursor: default; }
+.cf-status { margin: 0; font-size: .85rem; color: var(--ink-soft); }
+.cf-status.ok { color: var(--accent); }
+.cf-status.err { color: #C0503C; }
+
+.author-ig { margin: .55rem 0 0; font-size: .9rem; }
+.author-ig a { color: var(--accent); font-weight: 550; }
+.author-ig a:hover { text-decoration: underline; }
+
+@media (max-width: 720px) {
+  .connect-in { grid-template-columns: 1fr; }
+  .cf-row { flex-direction: column; }
+}

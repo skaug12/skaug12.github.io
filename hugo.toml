@@ -10,9 +10,17 @@ enableRobotsTXT = false # static/robots.txt를 그대로 사용
   description = "커뮤니티를 11년째 운영하며, AI와 함께 일하는 방식과 그 시행착오를 기록합니다."
   # 채우면 Person 스키마 sameAs로 들어감 (예: https://www.linkedin.com/in/...)
   linkedin = ""
+  # 인스타 핸들(@ 없이). 채우면 하단 연결 스트립에 DM CTA(ig.me/m/) 렌더. 비우면 미표시.
+  instagram = "seulki.log"
+  # 컨택트 폼 = 구글 폼(formResponse) 전송. 비우면 폼 미표시. 응답은 슬기 구글 폼/시트에 쌓이고
+  # 폼 '응답' 탭 → 이메일 알림으로 메일 수신. 필드는 아래 entry.* ID로 매핑(폼 링크에서 추출).
+  contact_form = "https://docs.google.com/forms/d/e/1FAIpQLSe-Ut4EPZkrFDA31Wj5wUUuPTlL-R2QDU-KkD89CnEWl8h3qA/formResponse"
+  contact_name = "entry.778884339"
+  contact_email = "entry.2057064025"
+  contact_message = "entry.1596175874"
   # 조회수·좋아요·공유 백엔드(slog-reactions Worker) 주소. 비우면 카운터 비활성(현 상태).
   # 예: reactions = "https://slog-reactions.xxx.workers.dev"
-  reactions = ""
+  reactions = "https://slog-reactions.seulkilog.workers.dev"
 
 [taxonomies]
   series = "series"

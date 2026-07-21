@@ -74,4 +74,39 @@
   } else {
     els.forEach(function (el) { el.classList.add('in'); });
   }
+
+  /* ---- contact form (Formspree AJAX, 페이지 이동 없이 전송) ---- */
+  var cf = document.querySelector('.connect-form');
+  if (cf) {
+    var status = cf.querySelector('.cf-status');
+    var sendBtn = cf.querySelector('.cf-send');
+    cf.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var hp = cf.querySelector('[name="_hp"]');
+      if (hp && hp.value) return; // honeypot 채워짐 = 봇, 조용히 무시
+      if (!cf.checkValidity()) { cf.reportValidity(); return; }
+      status.textContent = '';
+      status.className = 'cf-status';
+      sendBtn.disabled = true;
+      var prev = sendBtn.textContent;
+      sendBtn.textContent = '보내는 중…';
+      // 구글 폼(formResponse)은 CORS로 응답을 못 읽어 no-cors로 전송 → 낙관적 성공 처리
+      var params = new URLSearchParams();
+      new FormData(cf).forEach(function (v, k) { if (k !== '_hp') params.append(k, v); });
+      fetch(cf.action, { method: 'POST', mode: 'no-cors', body: params })
+        .then(function () {
+          cf.reset();
+          status.textContent = '보냈어요. 확인하고 곧 답장 드릴게요.';
+          status.classList.add('ok');
+        })
+        .catch(function () {
+          status.textContent = '전송에 실패했어요. 잠시 후 다시 시도하거나 인스타 DM으로 주셔도 좋아요.';
+          status.classList.add('err');
+        })
+        .then(function () {
+          sendBtn.disabled = false;
+          sendBtn.textContent = prev;
+        });
+    });
+  }
 })();
