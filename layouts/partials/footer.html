@@ -1,5 +1,9 @@
 <footer class="site">
   <div class="wrap footin">
-    <p class="colo">© {{ now.Year }} {{ .Site.Params.author }}</p>
+    <div class="author-bio">
+      <p><b>{{ .Site.Params.author }}</b> · 커뮤니티를 11년째 운영하며 AI로 운영 업무를 자동화합니다. 이 블로그는 그 과정의 실제 기록입니다.</p>
+      <a href="{{ "about/" | absURL }}">소개 →</a>
+    </div>
+    <p class="colo">© {{ now.Year }} {{ .Site.Params.author }}. All rights reserved.</p>
   </div>
 </footer>

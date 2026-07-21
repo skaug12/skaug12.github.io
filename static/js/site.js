@@ -110,17 +110,20 @@
     });
   }
 
-  /* ---- 메일 보내기: 클릭하면 컨택 폼 펼침 ---- */
+  /* ---- 메일 보내기: 팝업(모달)로 컨택 폼 열기 ---- */
   document.querySelectorAll('.c-mail-toggle').forEach(function (btn) {
     btn.addEventListener('click', function () {
-      var form = btn.parentNode.querySelector('.connect-form');
-      if (form) {
-        form.hidden = false;
-        btn.setAttribute('aria-expanded', 'true');
-        btn.hidden = true;
-        var first = form.querySelector('input, textarea');
-        if (first) first.focus();
-      }
+      var modal = document.querySelector('.mail-modal');
+      if (!modal) return;
+      if (modal.showModal) modal.showModal(); else modal.setAttribute('open', '');
+      var first = modal.querySelector('input, textarea');
+      if (first) setTimeout(function () { first.focus(); }, 30);
     });
+  });
+  document.querySelectorAll('.mail-modal').forEach(function (modal) {
+    function closeIt() { if (modal.close) modal.close(); else modal.removeAttribute('open'); }
+    modal.addEventListener('click', function (e) { if (e.target === modal) closeIt(); });
+    var c = modal.querySelector('.modal-close');
+    if (c) c.addEventListener('click', closeIt);
   });
 })();

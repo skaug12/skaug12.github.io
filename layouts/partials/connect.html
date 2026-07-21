@@ -3,14 +3,20 @@
   <div class="wrap contact-in">
     {{ with .Site.Params.instagram }}<a class="c-ig" href="https://ig.me/m/{{ . }}" target="_blank" rel="noopener noreferrer">인스타그램으로 DM 보내기 →</a>{{ end }}
     {{ with .Site.Params.contact_form }}
-    <button class="c-mail-toggle" type="button" aria-expanded="false">메일 보내기 →</button>
-    <form class="connect-form" action="{{ . }}" method="POST" novalidate hidden>
-      <label class="cf-field"><span class="cf-label">이름</span><input type="text" name="{{ $.Site.Params.contact_name }}" autocomplete="name" required></label>
-      <label class="cf-field"><span class="cf-label">이메일</span><input type="email" name="{{ $.Site.Params.contact_email }}" autocomplete="email" required></label>
-      <label class="cf-field"><span class="cf-label">메시지</span><textarea name="{{ $.Site.Params.contact_message }}" rows="4" required></textarea></label>
-      <input class="cf-hp" type="text" name="_hp" tabindex="-1" autocomplete="off" aria-hidden="true">
-      <div class="cf-foot"><button class="cf-send" type="submit">보내기</button><p class="cf-status" role="status" aria-live="polite"></p></div>
-    </form>
+    <button class="c-mail-toggle" type="button">메일 보내기 →</button>
+    <dialog class="mail-modal">
+      <div class="mail-modal-in">
+        <button class="modal-close" type="button" aria-label="닫기">✕</button>
+        <p class="mail-modal-h">메일 보내기</p>
+        <form class="connect-form" action="{{ . }}" method="POST" novalidate>
+          <label class="cf-field"><span class="cf-label">이름</span><input type="text" name="{{ $.Site.Params.contact_name }}" autocomplete="name" required></label>
+          <label class="cf-field"><span class="cf-label">이메일</span><input type="email" name="{{ $.Site.Params.contact_email }}" autocomplete="email" required></label>
+          <label class="cf-field"><span class="cf-label">메시지</span><textarea name="{{ $.Site.Params.contact_message }}" rows="4" required></textarea></label>
+          <input class="cf-hp" type="text" name="_hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+          <div class="cf-foot"><button class="cf-send" type="submit">보내기</button><p class="cf-status" role="status" aria-live="polite"></p></div>
+        </form>
+      </div>
+    </dialog>
     {{ end }}
   </div>
 </section>

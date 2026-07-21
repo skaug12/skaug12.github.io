@@ -108,22 +108,22 @@ img { max-width: 100%; height: auto; }
 .ix-item:first-of-type { border-top: none; }
 .ix-item:hover { background: var(--card); }
 .ix-item.active { background: var(--band); }
-.ix-item .c { font-size: .74rem; font-weight: 600; color: var(--ink-faint); }
-.ix-item .t { font-size: 1.02rem; font-weight: 600; line-height: 1.2; letter-spacing: -.02em; color: var(--ink); }
+.ix-item .c { font-size: .7rem; font-weight: 600; color: var(--ink-faint); }
+.ix-item .t { font-size: .83rem; font-weight: 600; line-height: 1.2; letter-spacing: -.02em; color: var(--ink); }
 .ix-item.active .t { font-weight: 700; text-decoration: underline; text-underline-offset: 3px; }
-.ix-item .d { font-size: .74rem; color: var(--ink-faint); font-variant-numeric: tabular-nums;
+.ix-item .d { font-size: .7rem; color: var(--ink-faint); font-variant-numeric: tabular-nums;
   white-space: nowrap; text-align: right; }
 
 /* ── 오른쪽: 글 내용 ── */
 .reader { padding: 2.7rem clamp(1.6rem,3vw,3.6rem) 4rem; }
 .panel { display: none; max-width: 36rem; }
 .panel.active { display: block; }
-.panel > h1 { font-size: calc(1.9rem * var(--reader)); font-weight: 700; line-height: 1.32;
+.panel > h1 { font-size: calc(1.55rem * var(--reader)); font-weight: 700; line-height: 1.32;
   letter-spacing: -.03em; margin: 0 0 .85rem; text-wrap: balance; }
-.panel > .meta { font-size: .8rem; color: var(--ink-faint); display: flex; gap: .85rem;
+.panel > .meta { font-size: .72rem; color: var(--ink-faint); display: flex; gap: .85rem;
   flex-wrap: wrap; align-items: center; margin: 0 0 2rem; padding-bottom: 1.3rem;
   border-bottom: 1px solid var(--line); }
-.panel-open { margin: 2rem 0 0; font-size: .86rem; }
+.panel-open { margin: 1.6rem 0 0; font-size: .72rem; }
 .panel-open a { text-decoration: underline; text-underline-offset: 2px; color: var(--ink-soft); }
 .panel-open a:hover { color: var(--ink); }
 
@@ -175,19 +175,19 @@ img { max-width: 100%; height: auto; }
    글 페이지 (single) & 목록/분류 헤더
    ============================================================ */
 .post { padding-top: clamp(2.4rem,6vw,3.6rem); padding-bottom: 1rem; }
-.post .h1 { font-size: calc(clamp(1.5rem,3vw,2rem) * var(--reader)); font-weight: 700;
+.post .h1 { font-size: calc(1.55rem * var(--reader)); font-weight: 700;
   line-height: 1.35; margin: 0 0 .9rem; text-wrap: balance; letter-spacing: -0.025em; }
-.post .post-meta { font-size: .82rem; font-weight: 450; color: var(--ink-faint);
+.post .post-meta { font-size: .72rem; font-weight: 450; color: var(--ink-faint);
   margin: 0 0 2.2rem; display: flex; gap: .9rem; flex-wrap: wrap; align-items: center; }
 .post .post-meta a { color: var(--ink-soft); font-weight: 550; }
 .post .post-meta a:hover { text-decoration: underline; text-underline-offset: 2px; }
 .post .post-meta .num { font-variant-numeric: tabular-nums; }
 
-.post-content { font-size: calc(1.0625rem * var(--reader)); line-height: 1.9; color: var(--ink); }
+.post-content { font-size: calc(.92rem * var(--reader)); line-height: 1.9; color: var(--ink); }
 .post-content > * + * { margin-top: 1.25em; }
-.post-content h2 { font-size: calc(1.3rem * var(--reader)); font-weight: 700; line-height: 1.4;
+.post-content h2 { font-size: calc(1.08rem * var(--reader)); font-weight: 700; line-height: 1.4;
   margin-top: 2.4em; margin-bottom: .2em; letter-spacing: -0.02em; }
-.post-content h3 { font-size: calc(1.12rem * var(--reader)); font-weight: 700; margin-top: 1.8em; margin-bottom: .1em; }
+.post-content h3 { font-size: calc(.98rem * var(--reader)); font-weight: 700; margin-top: 1.8em; margin-bottom: .1em; }
 .post-content p { margin: 0; }
 .post-content a { text-decoration: underline; text-underline-offset: 2px; text-decoration-color: var(--line); }
 .post-content a:hover { text-decoration-color: var(--ink); }
@@ -222,17 +222,35 @@ img { max-width: 100%; height: auto; }
 .page-head h1 { font-size: calc(clamp(1.4rem,3vw,1.8rem) * var(--reader)); font-weight: 700; margin: 0 0 .5rem; letter-spacing: -0.02em; }
 .page-head .lede { color: var(--ink-soft); margin: 0; }
 
-/* ---- footer (저작권만, 컨택트 영역에 바로 붙게) ---- */
+/* ---- footer (작가 소개 + 저작권, 컨택트 영역에 바로 붙게) ---- */
 footer.site { border-top: 1px solid var(--line); margin-top: 0; }
-.footin { padding: 1.4rem 0 3rem; }
-.colo { font-size: .8rem; color: var(--ink-faint); text-align: left; margin: 0; }
+.footin { padding: 1.6rem 0 3rem; display: flex; flex-direction: column; gap: .9rem; }
+.author-bio { display: flex; flex-direction: column; gap: .3rem; max-width: 34rem; }
+.author-bio p { margin: 0; font-size: .8rem; line-height: 1.7; color: var(--ink-soft); }
+.author-bio b { color: var(--ink); font-weight: 700; }
+.author-bio a { width: max-content; font-size: .78rem; color: var(--ink);
+  text-decoration: underline; text-underline-offset: 2px; }
+.colo { font-size: .74rem; color: var(--ink-faint); text-align: left; margin: 0; }
+.rail-foot .author-bio p, .rail-foot .author-bio a { font-size: .74rem; }
+
+/* ---- 메일 팝업(모달) ---- */
+.mail-modal { border: 1px solid var(--ink); border-radius: 0; background: var(--paper); color: var(--ink);
+  padding: 0; max-width: 30rem; width: calc(100% - 2rem); }
+.mail-modal::backdrop { background: rgba(0,0,0,.45); }
+.mail-modal-in { padding: 1.5rem 1.6rem 1.8rem; display: flex; flex-direction: column; gap: .7rem; }
+.mail-modal-h { font-size: .95rem; font-weight: 700; margin: 0; }
+.modal-close { align-self: flex-end; background: none; border: 0; padding: 0; margin: -.3rem -.3rem -.5rem 0;
+  font-size: 1.1rem; line-height: 1; color: var(--ink-faint); cursor: pointer; }
+.modal-close:hover { color: var(--ink); }
+.mail-modal .connect-form { gap: .7rem; }
+.mail-modal .cf-foot { margin-top: .3rem; }
 
 /* ---- reactions bar (조회 · 좋아요 · 공유) — 각진 ---- */
 .reactions {
   display: flex; align-items: center; gap: .8rem; flex-wrap: wrap;
   margin: 2.4rem 0 0; padding-top: 1.3rem;
   border-top: 1px solid var(--line);
-  font-size: .9rem; color: var(--ink-soft);
+  font-size: .8rem; color: var(--ink-soft);
 }
 .reactions .num { font-variant-numeric: tabular-nums; }
 .reactions button {
