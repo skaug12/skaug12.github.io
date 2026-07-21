@@ -81,7 +81,7 @@ img { max-width: 100%; height: auto; }
 /* ── 왼쪽 위: 정체성 · 메뉴 (여백 넉넉, 좌상단) ── */
 .rail { padding: 2.7rem 1.8rem 1.2rem; display: flex; flex-direction: column; gap: 1.7rem; }
 .rail .mark { font-size: .83rem; font-weight: 700; letter-spacing: -.02em; color: var(--ink); }
-.rail .desc { font-size: .83rem; line-height: 1.7; color: var(--ink-soft); margin: 0; max-width: 15rem; }
+.rail .desc { font-size: .72rem; line-height: 1.7; color: var(--ink-soft); margin: 0; max-width: 15rem; }
 .rail-nav { display: flex; flex-direction: column; gap: .3rem; font-size: .83rem; line-height: 1.2; }
 .rail-nav .grp { font-size: .68rem; font-weight: 600; letter-spacing: .08em; color: var(--ink-faint);
   text-transform: uppercase; margin: .95rem 0 .2rem; }
@@ -99,7 +99,7 @@ img { max-width: 100%; height: auto; }
   font-size: .72rem; color: var(--ink-faint); padding-top: 2.4rem; }
 .rail-connect .theme { align-self: flex-start; border: 1px solid var(--line); color: var(--ink-soft);
   padding: .3rem .7rem; font-size: .83rem; }
-.rail-connect .theme:hover { border-color: var(--ink); color: var(--ink); }
+.rail-connect .theme:hover { background: var(--ink); color: var(--paper); border-color: var(--ink); }
 
 /* ── 가운데: 글 제목 목록 (한 줄: 카테고리 · 제목 · 업로드일) ── */
 .index { padding: 2.4rem 0 3rem; }
@@ -146,7 +146,8 @@ img { max-width: 100%; height: auto; }
   color: var(--ink-faint); padding: .25rem .4rem; line-height: 1; border-radius: 0;
   transition: color .2s ease;
 }
-.fs button:hover, .theme:hover { color: var(--ink); }
+.fs button:hover { color: var(--ink); }
+.theme:hover { background: var(--ink); color: var(--paper); }
 .fs button.on { color: var(--ink); }
 .fs .a1 { font-size: .7rem; } .fs .a2 { font-size: .84rem; } .fs .a3 { font-size: 1rem; }
 .theme { font-size: .78rem; font-weight: 500; text-transform: uppercase; }
@@ -235,7 +236,7 @@ footer.site { border-top: 1px solid var(--line); margin-top: 0; }
 .colo { font-size: .74rem; color: var(--ink-faint); text-align: left; margin: 0; }
 .rail-foot .author-bio { gap: .55rem; }
 .rail-foot .author-bio p, .rail-foot .author-bio a { font-size: .83rem; }
-.rail-foot .colo { font-size: .83rem; }
+.rail-foot .colo { font-size: .72rem; }
 
 /* ---- 메일 팝업(모달) ---- */
 .mail-modal { border: 1px solid var(--ink); border-radius: 0; background: var(--paper); color: var(--ink);
@@ -280,10 +281,12 @@ footer.site { border-top: 1px solid var(--line); margin-top: 0; }
 .contact-in { display: flex; flex-direction: column; align-items: flex-start; gap: .8rem; }
 .contact-in .connect-form { width: 100%; max-width: 30rem; }
 /* 인스타 DM · 메일 보내기: 버튼 없이 글씨만 (밑줄 텍스트) */
-.c-ig, .c-mail-toggle { font: inherit; font-size: .83rem; font-weight: 600; color: var(--ink);
-  background: none; border: 0; padding: 0; cursor: pointer;
-  text-decoration: underline; text-underline-offset: 3px; text-decoration-color: var(--line); }
-.c-ig:hover, .c-mail-toggle:hover { text-decoration-color: var(--ink); }
+.c-ig, .c-mail-toggle { display: inline-flex; align-items: center; gap: .4rem;
+  font: inherit; font-size: .83rem; font-weight: 600; color: var(--ink);
+  background: none; border: 0; padding: 0; cursor: pointer; text-decoration: none; }
+.c-ig .ci, .c-mail-toggle .ci { flex: none; }
+.c-ig span, .c-mail-toggle span { text-decoration: underline; text-underline-offset: 3px; text-decoration-color: var(--line); }
+.c-ig:hover span, .c-mail-toggle:hover span { text-decoration-color: var(--ink); }
 
 .connect-form { display: flex; flex-direction: column; gap: .9rem; }
 .cf-row { display: flex; flex-direction: column; gap: .9rem; }   /* 이름·이메일도 세로 1열 */

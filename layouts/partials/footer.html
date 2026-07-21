@@ -1,5 +1,6 @@
 <footer class="site">
   <div class="wrap footin">
+    {{ if ne .RelPermalink "/about/" }}
     <div class="author-bio">
       <img class="av" src="{{ "profile.jpg" | absURL }}" alt="{{ .Site.Params.author }}" width="52" height="52" loading="lazy">
       <div class="author-bio-txt">
@@ -7,6 +8,7 @@
         <a href="{{ "about/" | absURL }}">소개 →</a>
       </div>
     </div>
+    {{ end }}
     <p class="colo">© {{ now.Year }} {{ .Site.Params.author }}. All rights reserved.</p>
   </div>
 </footer>
