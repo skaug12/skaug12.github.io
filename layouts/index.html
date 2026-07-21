@@ -15,22 +15,6 @@
       <a href="{{ "index.xml" | absURL }}">RSS</a>
       <a href="{{ "llms.txt" | absURL }}">llms.txt</a>
     </nav>
-    <hr>
-    {{ with .Site.Params.instagram }}<a class="ig" href="https://ig.me/m/{{ . }}" target="_blank" rel="noopener noreferrer">인스타 DM →</a>{{ end }}
-    {{ with .Site.Params.contact_form }}
-    <form class="connect-form" action="{{ . }}" method="POST" novalidate>
-      <p class="cf-h">연락하기</p>
-      <label class="cf-field"><span class="cf-label">이름</span><input type="text" name="{{ $.Site.Params.contact_name }}" autocomplete="name" required></label>
-      <label class="cf-field"><span class="cf-label">이메일</span><input type="email" name="{{ $.Site.Params.contact_email }}" autocomplete="email" required></label>
-      <label class="cf-field"><span class="cf-label">메시지</span><textarea name="{{ $.Site.Params.contact_message }}" rows="3" required></textarea></label>
-      <input class="cf-hp" type="text" name="_hp" tabindex="-1" autocomplete="off" aria-hidden="true">
-      <div class="cf-foot"><button class="cf-send" type="submit">보내기</button><p class="cf-status" role="status" aria-live="polite"></p></div>
-    </form>
-    {{ end }}
-    <div class="rail-foot">
-      <button class="theme" id="theme" type="button" aria-label="라이트·다크 전환">Dark</button>
-      <span>since 2026 · {{ .Site.Params.author }}</span>
-    </div>
   </aside>
 
   <nav class="index" aria-label="글 목록">
@@ -59,6 +43,26 @@
     </article>
     {{ end }}
   </section>
+
+  <aside class="rail-connect">
+    <div class="rc-in">
+      <p class="rc-h">연결하기</p>
+      {{ with .Site.Params.instagram }}<a class="ig" href="https://ig.me/m/{{ . }}" target="_blank" rel="noopener noreferrer">인스타그램으로 DM 보내기 →</a>{{ end }}
+      {{ with .Site.Params.contact_form }}
+      <form class="connect-form" action="{{ . }}" method="POST" novalidate>
+        <label class="cf-field"><span class="cf-label">이름</span><input type="text" name="{{ $.Site.Params.contact_name }}" autocomplete="name" required></label>
+        <label class="cf-field"><span class="cf-label">이메일</span><input type="email" name="{{ $.Site.Params.contact_email }}" autocomplete="email" required></label>
+        <label class="cf-field"><span class="cf-label">메시지</span><textarea name="{{ $.Site.Params.contact_message }}" rows="3" required></textarea></label>
+        <input class="cf-hp" type="text" name="_hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+        <div class="cf-foot"><button class="cf-send" type="submit">메일 보내기</button><p class="cf-status" role="status" aria-live="polite"></p></div>
+      </form>
+      {{ end }}
+    </div>
+    <div class="rail-foot">
+      <button class="theme" id="theme" type="button" aria-label="라이트·다크 전환">Dark</button>
+      <span>since 2026 · {{ .Site.Params.author }}</span>
+    </div>
+  </aside>
 
 </div>
 
