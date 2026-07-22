@@ -11,6 +11,7 @@
   {{ partial "footer.html" . }}
   <button class="to-top" type="button" aria-label="맨 위로">↑</button>
 {{- end }}
-  <script src="{{ "js/site.js" | absURL }}"></script>
+  {{ $siteJs := resources.Get "js/site.js" | fingerprint }}
+  <script src="{{ $siteJs.RelPermalink }}"></script>
 </body>
 </html>

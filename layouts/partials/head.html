@@ -24,6 +24,7 @@
 {{ end }}
 {{ with .Site.Home.OutputFormats.Get "RSS" }}<link rel="alternate" type="application/rss+xml" title="{{ $.Site.Title }}" href="{{ .Permalink }}">{{ end }}
 <link rel="preload" href="{{ "fonts/PretendardVariable.woff2" | absURL }}" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="{{ "css/style.css" | absURL }}">
+{{ $css := resources.Get "css/style.css" | fingerprint }}
+<link rel="stylesheet" href="{{ $css.RelPermalink }}">
 {{ partial "jsonld.html" . }}
 </head>
