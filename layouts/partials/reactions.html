@@ -8,6 +8,8 @@
   <span class="react-share-group">
     <button class="react-share" data-platform="copy" type="button" aria-label="링크 복사">링크 복사</button>
     <span class="react-shares num" title="공유 클릭 수">0</span>
+    {{ with .Site.Params.instagram }}<a class="c-ig" href="https://instagram.com/{{ . }}" target="_blank" rel="noopener noreferrer" aria-label="인스타그램" title="인스타그램"><svg class="ci" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="2.5" width="19" height="19" rx="5.4"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.5" cy="6.5" r="1.15" fill="currentColor" stroke="none"/></svg></a>{{ end }}
+    {{ with .Site.Params.contact_form }}<button class="c-mail-toggle" type="button" aria-label="메일 보내기" title="메일 보내기"><svg class="ci" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg></button>{{ end }}
   </span>
 </div>
 <script src="{{ "js/reactions.js" | absURL }}" defer></script>

@@ -126,4 +126,29 @@
     var c = modal.querySelector('.modal-close');
     if (c) c.addEventListener('click', closeIt);
   });
+
+  /* ---- 읽기 진행바 (글·목록 페이지) ---- */
+  var progBar = document.querySelector('.read-progress span');
+  if (progBar) {
+    var updateProg = function () {
+      var el = document.documentElement;
+      var max = el.scrollHeight - el.clientHeight;
+      var y = window.scrollY || el.scrollTop;
+      progBar.style.width = (max > 0 ? Math.min(1, y / max) * 100 : 0).toFixed(2) + '%';
+    };
+    window.addEventListener('scroll', updateProg, { passive: true });
+    window.addEventListener('resize', updateProg);
+    updateProg();
+  }
+
+  /* ---- 맨 위로 버튼 ---- */
+  var toTop = document.querySelector('.to-top');
+  if (toTop) {
+    var toggleTop = function () { toTop.classList.toggle('show', (window.scrollY || 0) > 400); };
+    window.addEventListener('scroll', toggleTop, { passive: true });
+    toggleTop();
+    toTop.addEventListener('click', function () {
+      window.scrollTo({ top: 0, behavior: reduce ? 'auto' : 'smooth' });
+    });
+  }
 })();

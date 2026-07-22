@@ -5,10 +5,11 @@
 {{- if .IsHome }}
   {{ block "main" . }}{{ end }}
 {{- else }}
+  <div class="read-progress" aria-hidden="true"><span></span></div>
   {{ partial "header.html" . }}
   <main>{{ block "main" . }}{{ end }}</main>
-  {{ partial "connect.html" . }}
   {{ partial "footer.html" . }}
+  <button class="to-top" type="button" aria-label="맨 위로">↑</button>
 {{- end }}
   <script src="{{ "js/site.js" | absURL }}"></script>
 </body>
