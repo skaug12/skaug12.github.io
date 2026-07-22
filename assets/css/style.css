@@ -312,9 +312,7 @@ footer.site { border-top: 0.5px solid var(--line); margin-top: 0; }
 .react-like .ic { font-size: .9rem; }
 .react-like.on { color: var(--ink); border-color: var(--ink); background: var(--band); }
 .react-views { color: var(--ink-faint); }
-.react-share-group { display: inline-flex; align-items: center; gap: .45rem; }
-/* 글 페이지: 연락 아이콘을 줄 가운데로 (좌우 auto 마진이 남는 공간을 반씩 먹음) */
-.react-contact { display: inline-flex; align-items: center; gap: .1rem; margin: 0 auto; }
+.react-share-group { display: inline-flex; align-items: center; gap: .45rem; margin-left: auto; }
 .react-share-label { color: var(--ink-faint); }
 .react-share { padding: .22rem .6rem; font-size: .82rem; }
 .react-shares { color: var(--ink-faint); }

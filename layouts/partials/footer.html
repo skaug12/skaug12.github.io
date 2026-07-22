@@ -12,12 +12,10 @@
     </div>
     {{ end }}
 
-    {{/* 글 페이지는 반응바(링크 복사 옆)에 아이콘이 있으므로, 그 외 페이지에서만 하단에 노출 */}}
-    {{ if ne .Section "posts" }}
+    {{/* 연락 아이콘: 모든 페이지에서 같은 자리 (작가소개 아래 · 저작권 위 · 왼쪽 정렬) */}}
     <div class="foot-contact">
       {{ partial "contact-icons.html" . }}
     </div>
-    {{ end }}
 
     <p class="colo">© {{ now.Year }} {{ .Site.Params.author }}. All rights reserved.</p>
 
