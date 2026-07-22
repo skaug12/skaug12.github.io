@@ -7,7 +7,6 @@
     <a class="mark" href="{{ "" | absURL }}"><b>seulki</b>.log</a>
     <p class="desc">{{ .Site.Params.description }}</p>
     <nav class="rail-nav" aria-label="사이트 메뉴">
-      <a href="{{ "posts/" | absURL }}">글 전체</a>
       <span class="grp">Category</span>
       {{ range hugo.Data.categories }}<a href="{{ "categories/" | absURL }}{{ .name | urlize }}/">{{ .name }}</a>{{ end }}
       <span class="grp">More</span>
@@ -20,7 +19,7 @@
     {{ $cat := "" }}{{ with .Params.categories }}{{ $cat = index . 0 }}{{ end }}
     <a class="ix-item{{ if eq .Permalink $newest }} active{{ end }}" href="{{ .Permalink }}" data-id="{{ .Params.slug | default .File.ContentBaseName }}">
       <span class="c">{{ with $cat }}{{ . }}{{ else }}글{{ end }}</span>
-      <span class="t">{{ .Title }}</span>
+      <span class="t"><span class="t-in">{{ .Title }}</span></span>
       <span class="d num">{{ .Date.Format "2006. 1. 2" }}</span>
     </a>
     {{ end }}
