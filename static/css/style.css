@@ -273,7 +273,9 @@ footer.site { border-top: 0.5px solid var(--line); margin-top: 0; }
 /* 푸터 하단 연락 아이콘 (소개 등 글 아닌 페이지) */
 .foot-contact { display: flex; align-items: center; gap: .6rem; margin-left: -.35rem; }
 /* 반응바 안 연락 아이콘 (링크 복사 옆) */
-.reactions .c-ig, .reactions .c-mail-toggle { padding: .2rem .28rem; border: 0; background: none; }
+/* 반응바: 링크 복사 버튼과 총 높이 동일(약 21px). 테두리 없이 글리프를 키워 같은 크기로 보이게 */
+.reactions .c-ig, .reactions .c-mail-toggle { padding: .16rem .28rem; border: 0; background: none; }
+.reactions .ci { width: 16px; height: 16px; }
 .bio-links .c-ig, .bio-links .c-mail-toggle { margin: -.35rem 0; }
 .colo { font-size: .74rem; color: var(--ink-faint); text-align: left; margin: 0; }
 .rail-foot .author-bio { gap: .55rem; }
@@ -327,7 +329,10 @@ footer.site { border-top: 0.5px solid var(--line); margin-top: 0; }
 .c-ig, .c-mail-toggle { display: inline-flex; align-items: center; justify-content: center;
   font: inherit; color: var(--ink-soft); background: none; border: 0; border-radius: 0;
   padding: .35rem; cursor: pointer; text-decoration: none; transition: color .15s ease; }
-.c-ig .ci, .c-mail-toggle .ci { flex: none; }
+/* 아이콘 선 굵기·모서리를 CSS에서 통제 (SVG 속성보다 CSS 우선) */
+.c-ig .ci, .c-mail-toggle .ci { flex: none; stroke-width: 1.2; }
+/* 각진 네모 원칙: 아이콘 안 사각형도 라운드 제거 (박스 덧씌우지 않음) */
+.ci rect { rx: 0; ry: 0; }
 .c-ig:hover, .c-mail-toggle:hover { color: var(--ink); }
 
 .connect-form { display: flex; flex-direction: column; gap: .9rem; }
