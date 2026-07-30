@@ -63,6 +63,26 @@ seulkilog.today의 AI 검색 노출(AEO)과 유입 추적을 어떻게 보고 �
 2. HTML 태그 방식의 content 값을 `hugo.toml`의 `naver_verification`에 넣고 배포
 3. 소유확인 후 사이트맵 제출: `https://seulkilog.today/sitemap.xml`
 
+### DNS 현재 상태 (2026-07-30 실측, Cloudflare 이전 전 기준)
+
+네임서버를 바꾸기 전 스냅샷. Cloudflare가 레코드를 자동으로 읽어온 뒤 **아래와 하나씩 대조**하고, 빠진 게 있으면 손으로 채운다. 문제가 생기면 GoDaddy에서 네임서버를 `ns63.domaincontrol.com`·`ns64.domaincontrol.com`로 되돌리면 원복된다.
+
+```
+NS      seulkilog.today        ns63.domaincontrol.com / ns64.domaincontrol.com  (GoDaddy 기본)
+A       seulkilog.today        185.199.108.153
+                               185.199.109.153
+                               185.199.110.153
+                               185.199.111.153
+CNAME   www                    skaug12.github.io
+TXT     seulkilog.today        google-site-verification=u7tZ6vAqizibvrLClSfjoGDkXrArFeXpQEXlUZwzpLs
+MX      (없음)                  이 도메인으로 메일을 받지 않음 → 이전 위험이 낮다
+CAA     (없음)
+```
+
+주의할 점 둘.
+- **TXT 레코드를 반드시 옮겨야 한다.** 빠지면 Search Console 소유확인이 풀릴 수 있다. (파일 방식 `google5e39f12f3150cceb.html`과는 별개 확인 수단이다.)
+- MX가 없으니 메일이 끊길 걱정은 없다. 이전 실패 시 영향은 웹 접속뿐이고, 네임서버 원복으로 복구된다.
+
 ### 3. Cloudflare를 DNS 앞에 두기
 
 **이게 AEO 추적의 답이다.** GitHub Pages 서빙은 그대로 두고 앞에 프록시만 얹는다.
