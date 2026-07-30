@@ -9,6 +9,8 @@
 <title>{{ if not .IsHome }}{{ .Title }} · {{ end }}{{ .Site.Title }}</title>
 <meta name="description" content="{{ $desc }}">
 <meta name="author" content="{{ .Site.Params.author }}">
+{{ with .Site.Params.google_verification }}<meta name="google-site-verification" content="{{ . }}">{{ end }}
+{{ with .Site.Params.naver_verification }}<meta name="naver-site-verification" content="{{ . }}">{{ end }}
 <link rel="canonical" href="{{ .Permalink }}">
 <meta property="og:site_name" content="{{ .Site.Title }}">
 <meta property="og:title" content="{{ .Title }}">
@@ -27,4 +29,5 @@
 {{ $css := resources.Get "css/style.css" | fingerprint }}
 <link rel="stylesheet" href="{{ $css.RelPermalink }}">
 {{ partial "jsonld.html" . }}
+{{ partial "analytics.html" . }}
 </head>

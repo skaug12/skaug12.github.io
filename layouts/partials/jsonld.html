@@ -5,16 +5,16 @@
   "@graph": [
     {
       "@type": "WebSite",
-      "name": {{ .Site.Title | jsonify }},
-      "url": {{ .Site.BaseURL | jsonify }},
-      "description": {{ .Site.Params.description | jsonify }},
+      "name": {{ .Site.Title }},
+      "url": {{ .Site.BaseURL }},
+      "description": {{ .Site.Params.description }},
       "inLanguage": "ko-KR"
     },
     {
       "@type": "Person",
-      "name": {{ .Site.Params.author | jsonify }},
-      "url": {{ .Site.BaseURL | jsonify }}{{ with .Site.Params.linkedin }},
-      "sameAs": [{{ . | jsonify }}]{{ end }}
+      "name": {{ .Site.Params.author }},
+      "url": {{ .Site.BaseURL }}{{ with .Site.Params.linkedin }},
+      "sameAs": [{{ . }}]{{ end }}
     }
   ]
 }
@@ -24,16 +24,32 @@
 {
   "@context": "https://schema.org",
   "@type": "BlogPosting",
-  "headline": {{ .Title | jsonify }},
-  "description": {{ or .Params.summary .Summary | plainify | jsonify }},
-  "datePublished": {{ .Date.Format "2006-01-02" | jsonify }},
-  "dateModified": {{ .Lastmod.Format "2006-01-02" | jsonify }},
+  "headline": {{ .Title }},
+  "description": {{ or .Params.summary .Summary | plainify }},
+  "url": {{ .Permalink }},
+  "datePublished": {{ .Date.Format "2006-01-02T15:04:05-07:00" }},
+  "dateModified": {{ .Lastmod.Format "2006-01-02T15:04:05-07:00" }},
   "inLanguage": "ko-KR",
-  "mainEntityOfPage": {{ .Permalink | jsonify }},
+  "wordCount": {{ .WordCount }},
+  "image": {{ "og.jpg" | absURL }},
+  {{ with .Params.categories }}"articleSection": [{{ range $i, $c := . }}{{ if $i }}, {{ end }}{{ $c }}{{ end }}],
+  {{ end }}{{ with .Params.series }}"isPartOf": {
+    "@type": "CreativeWorkSeries",
+    "name": {{ index . 0 }}
+  },
+  {{ end }}"mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": {{ .Permalink }}
+  },
   "author": {
     "@type": "Person",
-    "name": {{ .Site.Params.author | jsonify }},
-    "url": {{ .Site.BaseURL | jsonify }}
+    "name": {{ .Site.Params.author }},
+    "url": {{ .Site.BaseURL }}
+  },
+  "publisher": {
+    "@type": "Person",
+    "name": {{ .Site.Params.author }},
+    "url": {{ .Site.BaseURL }}
   }
 }
 </script>

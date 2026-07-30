@@ -46,4 +46,4 @@ Allow: /
 User-agent: Daumoa
 Allow: /
 
-Sitemap: https://skaug12.github.io/sitemap.xml
+Sitemap: https://seulkilog.today/sitemap.xml
