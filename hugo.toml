@@ -27,7 +27,7 @@ enableRobotsTXT = false # static/robots.txt를 그대로 사용
   # cf_beacon = Cloudflare Web Analytics 토큰(권장: 쿠키 없음·동의배너 불필요)
   # ga4       = GA4 측정 ID "G-XXXXXXXXXX"
   cf_beacon = ""
-  ga4 = ""
+  ga4 = "G-J1YE8VYNLJ"
   # 조회수·좋아요·공유 백엔드(slog-reactions Worker) 주소. 비우면 카운터 비활성(현 상태).
   # 예: reactions = "https://slog-reactions.xxx.workers.dev"
   reactions = "https://slog-reactions.seulkilog.workers.dev"
