@@ -13,12 +13,11 @@
  *         "https://www.googleapis.com/auth/analytics.readonly",
  *         "https://www.googleapis.com/auth/webmasters.readonly"
  *       ]
- *  4) PROPERTY_ID 교체 — GA4 > 관리 > 속성 설정 > 속성 세부정보 > 속성 ID (9자리 숫자)
- *  5) listSites() 한 번 실행 → 실행 로그에 뜬 값을 SITE_URL 에 붙여넣기
- *  6) setup() 실행 → 권한 승인 + 매일 오전 8시 트리거 등록
+ *  4) listSites() 실행 → 로그에 뜬 값을 SITE_URL 에 붙여넣기
+ *  5) setup() 실행 → 권한 승인 + 매일 오전 8시 트리거 등록
  */
 
-const PROPERTY_ID = '000000000';  // ← 교체
+const PROPERTY_ID = '547687406';
 const SITE_URL = 'sc-domain:seulkilog.today';  // ← listSites() 결과로 확인
 const SPREADSHEET_ID = '1An8bf3MlabVTjcOHPfzhHtVgG4dSJDXQCugqBL0-1B8';
 const LOOKBACK_DAYS = 4;   // GA4: 최근 N일 재수집 (늦게 들어오는 데이터 보정)
