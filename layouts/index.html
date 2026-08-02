@@ -78,6 +78,8 @@
     if(document.querySelector('.panel[data-id="'+id+'"]')){
       e.preventDefault(); show(id);
       if(history.pushState) history.pushState(null,'',a.getAttribute('href'));
+      /* 주소가 바뀐 뒤에 알려야 GA4가 올바른 경로로 기록한다 */
+      if(window.slogTrack) window.slogTrack.virtualPage(id);
     }
   });});
 })();

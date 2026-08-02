@@ -141,6 +141,58 @@
     updateProg();
   }
 
+  /* ---- GA4: 읽기 깊이 + 데스크톱 패널 전환 페이지뷰 ----
+     스크롤 25/50/75/100% 도달을 각각 scroll_25 … scroll_100 이벤트로 보낸다.
+     이벤트 이름을 나눠 쓰는 이유: GA4에서 맞춤 측정기준 등록 없이 바로 집계된다. */
+  (function () {
+    function ga() { if (typeof window.gtag === 'function') window.gtag.apply(null, arguments); }
+    var MARKS = [25, 50, 75, 100];
+    var active = null;
+
+    // el = 스크롤 컨테이너. null이면 문서 전체(window) 스크롤을 본다.
+    function watch(el) {
+      if (active) active();
+      var fired = {};
+      var target = el || window;
+
+      function percent() {
+        var box = el || document.documentElement;
+        var max = box.scrollHeight - box.clientHeight;
+        var y = el ? el.scrollTop : (window.scrollY || document.documentElement.scrollTop);
+        return max > 40 ? (y / max) * 100 : 100; // 스크롤이 없을 만큼 짧은 글은 100%로 본다
+      }
+      function stop() { target.removeEventListener('scroll', onScroll); }
+      function onScroll() {
+        var p = percent();
+        MARKS.forEach(function (m) {
+          if (!fired[m] && p >= m - 0.5) { fired[m] = 1; ga('event', 'scroll_' + m); }
+        });
+        if (fired[100]) stop();
+      }
+
+      target.addEventListener('scroll', onScroll, { passive: true });
+      active = stop;
+      onScroll();
+    }
+
+    // 데스크톱 홈에서 패널만 바뀔 때 호출된다 (index.html에서 부름)
+    function virtualPage(id) {
+      var panel = document.querySelector('.panel[data-id="' + id + '"]');
+      var h1 = panel && panel.querySelector('h1');
+      ga('event', 'page_view', {
+        page_location: location.href,
+        page_title: h1 ? h1.textContent : document.title,
+      });
+      watch(document.querySelector('.reader'));
+    }
+
+    var wide = window.matchMedia('(min-width:821px)').matches;
+    var reader = document.querySelector('.reader');
+    watch(document.body.classList.contains('home') && wide && reader ? reader : null);
+
+    window.slogTrack = { watch: watch, virtualPage: virtualPage };
+  })();
+
   /* ---- 맨 위로 버튼 ---- */
   var toTop = document.querySelector('.to-top');
   if (toTop) {
