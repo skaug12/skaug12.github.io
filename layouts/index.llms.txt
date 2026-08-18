@@ -11,6 +11,7 @@
 {{ range where .Site.RegularPages "Section" "posts" }}- {{ .Title }} ({{ .Permalink }}): {{ or .Params.summary .Summary | plainify }}
 {{ end }}
 ## 페이지
+- AX 전략 기획 포트폴리오: {{ "portfolio/" | absURL }}: 이슬기의 AX 포트폴리오 전문. AI 리터러시 과정 14시즌 운영(참여자 190명·157개 회사, 현업 적용률 80% 이상), PP 매트릭스와 STAR 사분면 실습 설계, 참여자가 만든 자동화 사례 4건, 1인 운영을 지탱한 스킬 125개·스크립트 305개·자동화 57건, 전수 대조 감사 구조. 발표덱 PDF 포함.
 - 소개: {{ "about/" | absURL }}
 - RSS: {{ "index.xml" | absURL }}
 - 사이트맵: {{ "sitemap.xml" | absURL }}
