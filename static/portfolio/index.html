@@ -22,7 +22,7 @@
 <meta name="twitter:description" content="개발자가 아닌 직장인에게 AI를 가르쳐 온 4년. AI 리터러시 과정 14시즌, 참여자 190명·157개 회사, 현업 적용률 80% 이상. 스킬 125개와 자동화 57건으로 1인 운영을 지탱한 AX 전략 기획 포트폴리오.">
 <meta name="twitter:image" content="https://seulkilog.today/portfolio/og.png">
 <script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "ProfilePage", "@id": "https://seulkilog.today/portfolio/#page", "url": "https://seulkilog.today/portfolio/", "name": "이슬기 — AX 전략 기획 포트폴리오", "description": "개발자가 아닌 직장인에게 AI를 가르쳐 온 4년. AI 리터러시 과정 14시즌, 참여자 190명·157개 회사, 현업 적용률 80% 이상. 스킬 125개와 자동화 57건으로 1인 운영을 지탱한 AX 전략 기획 포트폴리오.", "inLanguage": "ko-KR", "dateModified": "2026-08-19", "mainEntity": {"@id": "https://seulkilog.today/portfolio/#person"}, "isPartOf": {"@type": "WebSite", "@id": "https://seulkilog.today/#website", "url": "https://seulkilog.today/", "name": "Seulki.log"}}, {"@type": "Person", "@id": "https://seulkilog.today/portfolio/#person", "name": "이슬기", "alternateName": "Seulki Lee", "jobTitle": "AX 전략 기획 · AI Transformation", "description": "개발자가 아닌 직장인에게 AI를 가르쳐 온 4년, 그 전에 제 업무부터 AI로 다시 설계했습니다.", "email": "mailto:skaug12@gmail.com", "url": "https://seulkilog.today/", "sameAs": ["https://www.linkedin.com/in/fromsklee/", "https://seulkilog.today/"], "knowsAbout": ["AI Transformation", "AX 전략 기획", "AI 리터러시 교육", "업무 자동화", "Claude Code", "프롬프트 설계", "학습 프로그램 설계", "커뮤니티 운영", "지식 관리", "암묵지 문서화"], "worksFor": {"@type": "Organization", "name": "위어드벤처 · HBR Forum Korea"}, "alumniOf": {"@type": "CollegeOrUniversity", "name": "연세대학교 미래캠퍼스"}}]}</script>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css">
+
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css">
 <style>
   /* 범용 AX 덱 — 종이 흰색 + 잉크, 강조는 딥 틸 한 색만.
@@ -30,7 +30,7 @@
   :root{
     --ink:#181C1A; --body:#4C544F; --sub:#79817C; --faint:#A9B0AB;
     --line:#E4E7E3; --line2:#EFF1ED; --wash:#F3F4F0; --paper:#FCFCFA;
-    --deep:#171E1B; --deep-sub:#9AA8A2;
+    --deep:#171E1B; --deep-sub:#9AA8A2; --ground:#E7EBE7;
     --accent:#14655A;
   }
   .reveal{
@@ -190,35 +190,58 @@
   .cv .cr .og{ font-size:14px; font-weight:700; letter-spacing:-0.026em; line-height:1.45; }
   .cv .cr .de{ font-size:12.5px; color:var(--body); line-height:1.62; }
 
-  /* ---------- 웹 배포용 본문 (덱 아래) ---------- */
+  /* ---------- 웹 배포판 (body.web) — 세로로 쌓이는 반응형 페이지 ----------
+     덱과 같은 마크업을 쓰되 절대배치를 흐름배치로 풀어, 높이가 자유롭게 늘어나고
+     좁은 화면에서 단이 접히게 한다. reveal.js 는 쓰지 않는다. */
   .deckwrap{ height:100vh; }
-  .readable{ display:none; }
-  body.web .readable{
-    display:block; max-width:760px; margin:0 auto; padding:96px 28px 120px;
-    font-family:"Pretendard Variable",Pretendard,"Apple SD Gothic Neo",-apple-system,sans-serif;
-    color:var(--ink); letter-spacing:-0.015em; word-break:keep-all; background:var(--paper);
+  body.web .deckwrap{ height:auto; }
+  body.web{ margin:0; padding:0; background:var(--ground); }
+  body.web .reveal{ display:block; }
+  body.web .reveal .slides{
+    display:flex; flex-direction:column; align-items:center; gap:24px;
+    padding:24px 20px 64px; text-align:left; width:auto;
   }
-  body.web{ background:var(--paper); }
-  .readable h1{ font-size:33px; font-weight:700; line-height:1.34; letter-spacing:-0.032em; margin:0; }
-  .readable .rsub{ font-size:15.5px; color:var(--body); line-height:1.8; margin:20px 0 0; }
-  .readable .rdl{ margin:26px 0 0; font-size:14.5px; }
-  .readable .rdl a{ color:var(--accent); font-weight:600; text-decoration:none;
-                    border-bottom:1px solid var(--accent); padding-bottom:2px; }
-  .readable h2{ font-size:22px; font-weight:700; letter-spacing:-0.03em; line-height:1.4;
-                margin:66px 0 0; padding-top:26px; border-top:1px solid var(--line); }
-  .readable h3{ font-size:16.5px; font-weight:700; letter-spacing:-0.028em; margin:34px 0 0; }
-  .readable p{ font-size:15.5px; color:var(--body); line-height:1.86; margin:16px 0 0; }
-  .readable p.q{ font-size:20px; font-weight:700; color:var(--accent); line-height:1.55;
-                 letter-spacing:-0.03em; margin:26px 0 0; }
-  .readable ul{ margin:16px 0 0; padding:0; list-style:none; }
-  .readable li{ font-size:15px; color:var(--body); line-height:1.8; padding:11px 0;
-                border-top:1px solid var(--line2); }
-  .readable li b{ color:var(--ink); font-weight:700; }
-  .readable .rfoot{ margin-top:72px; padding-top:26px; border-top:1px solid var(--line);
-                    font-size:13.5px; color:var(--sub); line-height:1.8; }
-  .readable strong{ font-weight:700; color:var(--ink); }
-  .readable .hl{ color:var(--accent); font-weight:700; }
+  body.web .reveal .slides > section{
+    width:100%; max-width:1280px; height:auto; min-height:640px;
+    position:relative; background:var(--paper); box-sizing:border-box;
+    padding:80px 150px 36px; display:flex; flex-direction:column;
+    box-shadow:0 1px 4px rgba(24,28,26,.09); overflow:visible;
+  }
+  body.web .body{ position:static; left:auto; right:auto; top:auto; bottom:auto; flex:1 0 auto; }
+  body.web .foot{ position:static; left:auto; right:auto; bottom:auto;
+                  margin-top:52px; padding-top:22px; border-top:1px solid var(--line2); }
+  body.web .note, body.web .result, body.web .vnote{
+    position:static; left:auto; right:auto; bottom:auto; margin-top:44px; padding-top:24px; }
+  body.web .band, body.web .steps{ position:static; left:auto; right:auto; bottom:auto; margin-top:40px; }
+  body.web .cover .contact, body.web .close .links{
+    position:static; left:auto; bottom:auto; margin-top:auto; padding-top:72px; }
+  body.web .deep{ padding-top:104px; padding-bottom:56px; min-height:600px; }
 
+  /* 장마다 짧은 가로 룰 하나 */
+  body.web .body > .label{ position:relative; padding-top:22px; }
+  body.web .body > .label::before{
+    content:""; position:absolute; top:0; left:0; width:44px; height:2px; background:var(--accent);
+  }
+
+  /* 표지의 PDF 내려받기 */
+  .webdl{ display:none; }
+  body.web .webdl{ display:block; margin-top:26px; font-size:14px; }
+  body.web .webdl a{ color:#7FBDAE; font-weight:600; text-decoration:none;
+                     border-bottom:1px solid rgba(127,189,174,.5); padding-bottom:3px; }
+
+  @media (max-width:900px){
+    body.web .reveal .slides > section{ padding:56px 26px 28px; min-height:0; }
+    body.web .stats, body.web .cols3, body.web .qs, body.web .outs, body.web .split,
+    body.web .mx, body.web .vgrid, body.web .forms2, body.web .star4, body.web .ex,
+    body.web .band .eff, body.web .crit .ci, body.web .cs .cb, body.web .cv .cr,
+    body.web .tb .r, body.web .tb .hd{
+      grid-template-columns:1fr !important; gap:22px !important; }
+    body.web .qd:nth-child(odd){ border-right:0; }
+    body.web .qd:nth-child(even){ padding-left:0; }
+    body.web .cover h1{ font-size:44px; }
+    body.web .h-title{ font-size:24px; }
+    body.web .steps .sf{ flex-wrap:wrap; row-gap:8px; }
+  }
 </style>
 </head>
 <body class="web">
@@ -234,6 +257,7 @@
     <div class="tag">개발자가 아닌 직장인에게 AI를 가르쳐 온 4년,<br>그 전에 제 업무부터 AI로 다시 설계했습니다.</div>
   </div>
   <div class="contact">skaug12@gmail.com · 010-7162-4923 · linkedin.com/in/fromsklee</div>
+  <div class="webdl"><a href="seulki-lee-ax-portfolio.pdf" download>같은 내용을 PDF 18쪽으로 내려받기</a></div>
 </section>
 
 <!-- 02 문제 정의 -->
@@ -448,10 +472,6 @@
 </section>
 
 </div></div></div>
-<article class="readable"><h1>이슬기 — AX 전략 기획 포트폴리오</h1><p class="rsub">AI 실무 적용 · 교육 설계 · 운영 자동화<br>개발자가 아닌 직장인에게 AI를 가르쳐 온 4년,<br>그 전에 제 업무부터 AI로 다시 설계했습니다.</p><p class="rdl"><a href="seulki-lee-ax-portfolio.pdf">발표덱 PDF 내려받기 (18쪽)</a> · skaug12@gmail.com · 010-7162-4923 · linkedin.com/in/fromsklee</p><p class="rsub">아래는 위 발표덱 18장의 전문입니다. 슬라이드를 넘기지 않고 읽을 수 있게 옮겼습니다.</p><h2>AI를 배운 사람들이<br>회사에서 <span class="hl">못 쓰는 이유</span></h2><p>'AI 도구를 쓸 줄 아는 것'과 '회사 업무가 실제로 바뀌는 것'은 다릅니다.<br>저는 개발자가 아닌 직장인에게 AI를 가르치는 과정을 2022년 12월에 기획해 지금까지 이어왔습니다.<br>전자·통신·자동차·화학·유통·금융·제약·식품·플랫폼에서 온 실무자들은 늘 회고에 같은 말을 남겼습니다.</p><p class="q">"회사 데이터를 밖으로 못 빼는데<br>무엇을 할 수 있을까."</p><p>데이터 반출 금지 · 보안 정책 · 파일 암호화 · 사내 AI의 적용 범위 등 <strong>8개 유형</strong>을 14시즌 회고 292,003자에서 유형화했습니다.<br>입사 후 첫 과제로 이 목록의 <strong>내부 버전</strong>을 만듭니다. 무엇이 막혀 있는지 알아야 무엇을 열지 정할 수 있습니다.</p><h2>숫자</h2><p>2019년 6월부터 2026년 8월까지,<br>직장인 학습 커뮤니티에서 <span class="hl">유일한 실무자</span>로 일했습니다.</p><ul><li><b>14</b> — 시즌 AI 리터러시 과정을 한 번도 거르지 않고 이어서 운영. 2022.12 기획, 2023.03 첫 시작</li><li><b>80% 이상</b> — 현업 적용률 참여자가 배운 것을 실제 업무에 적용. 만족도가 아니라 적용 여부로 확인한 숫자</li><li><b>190명</b> — 157곳의 회사 AI 리터러시 과정에서 직접 만난 참여자와 소속 회사 수</li><li><b>30개 이상</b> — 설계한 학습 과정 과정당 3개월 6회차 18시간, 300회 이상 운영</li><li><b>2,500명 이상</b> — 직접 만난 실무자 300여 개 회사의 중간관리자·시니어. 누적 참여자는 3,000명이 넘습니다</li><li><b>1명</b> — 운영 실무자 분기마다 학습 과정 15개와 행사 20회 이상을 혼자 감당했습니다</li></ul><h2>한눈에 보기</h2><p>무엇을 했고, 어떤 결과가 나왔고,<br><span class="hl">입사 후 어떻게 쓸 것인지</span> 먼저 정리했습니다.</p><h3><strong>AI 리터러시 교육 과정을 만들고 운영</strong><br><span class="sm">개발자가 아닌 직장인 대상. 2022.12 기획, 2023.03 첫 운영</span></h3><p><b>결과</b> 참여자 <strong>80% 이상이 배운 것을 실제 업무에 적용</strong>. 회고 기록은 첫 시즌 1.3만 자에서 8.4만 자로 늘었습니다</p><p><b>입사 후</b> 임직원 AI 리터러시 교육을 설계·운영합니다. <strong>2주 간격 + 업무 리스트업 + 매 회차 개별 과제</strong> 구조로 짜야 업무가 바뀝니다</p><h3><strong>대기업 재직자가 사내에서 AI를 못 쓰는 이유를 수집</strong><br><span class="sm">14시즌 회고 292,003자에서 유형화</span></h3><p><b>결과</b> 데이터 반출 금지 · 보안 정책 · 파일 암호화 · 사내 AI의 적용 범위 등 <strong>8개 유형</strong>으로 정리했습니다</p><p><b>입사 후</b> 입사 후 첫 과제로 <strong>이 목록의 내부 버전</strong>을 만듭니다. 막힌 지점을 알아야 열 지점을 정할 수 있습니다</p><h3><strong>개인 업무를 AI로 다시 설계</strong><br><span class="sm">Claude Code 기반 자동화 체계 구축</span></h3><p><b>결과</b> 슬래시 명령 <strong>125개</strong>와 사람 없이 도는 자동화 <strong>57건</strong>을 만들어 <strong>분기마다 학습 과정 15개와 행사 20회 이상을 유일한 실무자로서 운영</strong>했습니다</p><p><b>입사 후</b> 전사 AX 과제 포트폴리오를 짤 때 <strong>같은 세 기준</strong>을 씁니다. 특히 '자동화하지 않을 일'을 명시하는 것이 신뢰를 만듭니다</p><h2>AI 리터러시 교육</h2><p>개발자가 아닌 직장인에게<br>AI를 가르치는 과정을 만들었습니다.</p><p>2022년 12월에 기획해 2023년 3월 첫 기수를 열었고 지금까지 이어왔습니다. 한 시즌은 3개월 6회차이고, 회고를 남긴 사람만 연인원 110명 이상입니다. 모집을 시작하면 언제나 정원이 마감됐습니다.</p><ul><li>① 이번 2주 AI 소식</li><li>② 지난 2주 동안 각자 해본 것 공유</li><li>③ 그날의 사분면 실습</li></ul><p>가운데 블록이 핵심입니다. 세션과 세션 사이 2주를 <strong>과제 기간</strong>으로 만들고, 그 결과를 다음 회차 첫머리에 공개하게 했습니다. 공지만 흐르던 채널이 스레드로 대화하는 채널이 됐습니다.</p><ul><li><b>80% 이상</b> — 배운 것을 실제 업무에 적용</li><li><b>6.5배</b> — 회고 기록량 1.3만 자 → 8.4만 자</li><li><b>1.6배</b> — 답글 221건 / 원글 135건</li></ul><p><strong>결과</strong> — 회고 기록량이 최다를 기록했습니다. 모집을 시작하면 늘 5분 안에 마감되었습니다.</p><h2>임직원 교육을 맡는다면</h2><p>임직원 AI 리터러시 교육을 맡는다면<br><span class="hl">같은 순서로</span> 설계하겠습니다.</p><ul><li><b>첫째</b> — 업무를 먼저 모읍니다 부서별로 '반복적인 일'을 리스트업합니다. 교육 내용보다 업무 목록이 먼저입니다.</li><li><b>둘째</b> — 특강이 아니라 간격을 둡니다 2주 간격 그룹 스터디를 기획하고, 그 사이를 각자의 과제 기간으로 만듭니다.</li><li><b>셋째</b> — 만든 것을 공유하고 고칩니다 결과를 공유하고 개선합니다. 반복적인 일에서 비상시적인 일로, 할 수 있었던 일에서 해보고 싶었던 일로 넓힙니다.</li></ul><p>AI 도입이 어려운 것은 임직원이 <span class="hl">자신의 일이 대체된다</span>고 생각하기 때문입니다.<br>AX로 업무를 효율적으로 하게 되면 실제로는 이런 것들이 따라옵니다.</p><ul><li>비효율적인 작업을 자동화합니다</li><li>AI가 대체할 수 없는, 내 의사결정이 필요한 지점을 알게 됩니다</li><li>나의 암묵지를 데이터로 쌓게 됩니다</li><li>새로운 업무 영역과 가능성을 발견합니다</li><li>잘하던 것을 더 잘하는 전문가가 됩니다</li></ul><h2>PP 매트릭스 — AX 프레임워크</h2><p>자기 업무를 '하고 싶은 일인가(Potential)'와 '반복되는 일인가(Pattern)' 두 축에 놓아 봅니다. 가로축은 Potential, 세로축은 Pattern입니다.</p><ul><li><b>반복된다 · 하고 싶지 않다</b> — 가장 먼저 넘긴다 메일 정리, 일정과 할 일 파악, 대시보드 관리처럼 매주 손이 가던 잡무. 여기서 회수한 시간이 나머지 세 칸의 자산이 됩니다</li><li><b>반복된다 · 하고 싶다</b> — 품질을 한 단계 올린다 이미 좋아하고 잘하는 반복 업무. 통째로 넘기지 않고 <strong>내 판단을 흐름 안에 남긴 채</strong> 결과물의 적합성을 높입니다</li><li><b>일회성이다 · 하고 싶지 않다</b> — 덜어내거나 넘긴다 마음이 가지 않는 한 번짜리 일. 다른 일과 어떻게 연결하면 빠르게 처리할지 고민하며 방법을 살펴봅니다</li><li><b>일회성이다 · 하고 싶다</b> — 회수한 시간을 여기에 쓴다 생각만 하고 시도하지 못한 일, 시간이 없어 끝맺지 못한 일. 첫 칸에서 되찾은 시간이 이 칸으로 흘러가는 것이 이 매트릭스의 목적입니다</li></ul><h2>실습 설계 — STAR 사분면과 두 장의 양식</h2><p>26여름 시즌은 3~6회차를 사분면 실습으로 고정했습니다. 새 도구를 배우는 자리가 아니라 이미 있는 자기 일을 꺼내는 자리로 만들었습니다.</p><ul><li><b>S · Start</b> — 하고 싶었는데 미뤄왔던 일</li><li><b>T · Try</b> — 평소 못한다고 생각했던 것</li><li><b>A · Amplify</b> — 이미 잘하지만 더 잘하고 싶은 것</li><li><b>R · Recover</b> — 반복에 뺏기던 시간을 되찾는 일</li></ul><h3>양식 ① 미뤄둔 일을 명령으로 — 4칸 양식</h3><ul><li>트리거 — 언제 이 일을 할 것인가 소스 — 어디서 정보를 가져올 것인가 처리 — 어떻게 가공할 것인가 결과 — 결과를 어디로 보낼 것인가</li></ul><h3>양식 ② 잘하는 일의 품질을 올릴 때 — 4칸 명령</h3><ul><li>강점 — 지금 이미 되고 있는 것 한계 — 매번 걸리는 지점 목표 — 한 칸 올라간 상태 제약 — 건드리면 안 되는 것</li></ul><h3>실제로 나온 답 하나</h3><p>마케팅 · 콘텐츠 직무. <span class="sm">트리거</span> 매일 아침 명령어 하나로 → <span class="sm">소스</span> 저장만 하고 안 읽은 링크 1개 → <span class="sm">처리</span> 3줄 핵심 요약 + "왜 중요한지" + "오늘 써먹을 한 가지" → <span class="sm">결과</span> 날짜별 파일로 저장하고 목록에서 '읽음' 처리</p><p>STAR(Start·Try·Amplify·Recover)는 『두 번째 지능』(김상균)의 프레임워크를 6회차 실습 구조로 옮긴 것입니다. 두 양식은 직접 만들어 회차마다 배포했습니다.</p><h2>부서별 AX 과제를 뽑는 인터뷰</h2><p>같은 두 축을 <span class="hl">부서별 AX 과제를 뽑는<br>인터뷰 양식</span>으로 씁니다.</p><p>AI로 뭘 할 수 있을지 모르는 경우가 대부분입니다. 없애야 하는 것은 Unknown Unknowns 입니다. 아래 두 질문으로 시작하면 업무 목록이 만들어집니다.</p><p class="q">"매주 똑같이 하는 일이 뭔가요?"</p><p class="q">"그중 자동화하고 싶은 건 뭔가요?"</p><ul><li><b>과제 목록</b> — 부서별로 반복 업무가 드러나고, 우선순위를 매길 수 있는 후보가 모입니다</li><li><b>재투자 계획</b> — 절약한 시간을 <strong>어떤 업무에 쓸지까지</strong> 함께 정해야 AX 도입이 성과로 남습니다</li><li><b>공통 과제 발견</b> — 여러 부서에서 같은 업무가 나오면 그것이 전사 우선 과제입니다</li></ul><h2>참여자들이 실제로 만든 것</h2><p>세션마다 각자 만든 것을 공유하게 했습니다.<br>그 기록에서 <span class="hl">완성도가 높은 네 건</span>을 골랐습니다.</p><h3>재고 예측 프로그램의 정확도를 65%에서 100%로 <span class="hl">·</span> 제약 · 기획</h3><p><b>만든 것</b> 회사 재고 시스템에서 매달 재고 현황을 자동으로 뽑아내는 프로그램을 완성했습니다. 뽑아낸 숫자가 실제와 맞는지 대조하는 방법까지 만들어 정확도를 <strong>65%에서 100%로</strong> 끌어올렸습니다.</p><p><b>지킬 것</b> 잘 쓰고 있는 예전 버전은 건드리지 않습니다. 목적이 다른 두 확인 방법을 섞지 않습니다. <strong>이 둘을 분리한 것이 정확도를 100%까지 올린 핵심</strong>이라 편하다고 합치면 오차가 되살아납니다.</p><h3>감으로 하던 카피 판단을 재현 가능한 기준서로 <span class="hl">·</span> 식품 · 마케팅</h3><p><b>만든 것</b> 팽팽한 카피 두 버전을 놓고 "이게 낫다, 왜냐면"을 즉석에서 판단하고 그 이유를 원칙 한 줄로 받아 적는 대조 인터뷰를 반복했습니다. 라운드를 거듭하며 쌓인 규칙으로 <strong>본인 이름을 붙인 카피 기준서 한 장</strong>을 만들었습니다.</p><p><b>왜 중요한가</b> 카피를 보면 0.5초 만에 좋고 나쁨을 아는데 왜인지는 말로 안 나옵니다. 몸에 밴 감각을 남이 봐도 재현되는 규칙으로 꺼낸 것 — <span class="hl">암묵지를 문서로 꺼낸 사례</span>입니다.</p><h3>세 개의 명령을 이어 붙여 국문·영문 글 발행까지 <span class="hl">·</span> 데이터 서비스 · 콘텐츠 발행</h3><p><b>만든 것</b> 업계 소식 수집 명령과 블로그 수집 명령으로 다중 출처 수집·요약을 자동화하고, 여기에 <strong>출처 신뢰도 기준</strong>(높음 / 보통 / 벤더 자료 주의)과 인터뷰 기반 작성 원칙을 적용해 해외 AI 규제 관련 글을 <strong>국문·영문 모두 완성하고 실제 발행까지</strong> 마쳤습니다.</p><p><b>지킬 것</b> 인터뷰 없이 본문을 자동 생성하지 않습니다. 본인 경험이 없는 글은 마케팅 기사가 된다는 원칙 때문입니다. 신뢰도 높은 출처가 아니면 수치를 근거로 쓰지 않습니다.</p><h3>자기 약점을 진단해 명령으로 고정 <span class="hl">·</span> 보험 · 데이터 운영</h3><p><b>진단</b> <strong>강점</strong> — 데이터에서 이상 징후를 감지하면 끝까지 원인을 추적해 재현 가능한 규칙으로 코드에 고정하는 것. <strong>한계</strong> — 새 데이터를 처음 받으면 값의 정의를 확인하지 않고 진행하다 뒤늦게 여러 번 되돌아가 고치는 것.</p><p><b>해결</b> 새 데이터를 받으면 AI가 먼저 "이 값들이 뭘 의미하는지" 확인 질문을 던지게 만들되 <strong>질문은 세 개까지만</strong>, 그 이상 애매하면 가정하고 진행한 뒤 가정 목록만 알려주도록 했습니다.</p><h3>그 밖에 회차마다 나온 것</h3><ul><li>글로벌 인사·총무 주재원 비자 서류 자동화 / 교육·학원 운영 변형문항 35개를 두 달에서 하루로 / 광고·퍼포먼스 채널별 광고 데이터 연결한 구매 여정 분석</li><li>화학·소재 영업관리 경쟁사 추적·법률 검토·물류 마감 / 이커머스 마케팅 경쟁사 랭킹 비교 보고서 아침 수신 / 럭셔리 뷰티 매장별 개선점 데이터로 찾기</li><li>플랫폼 인사 해외 채용·비자 정책 뉴스 정리 / 인재개발원 주간 정리 자동화 / 통신사 기획 일·주·월 업무 정리 / 제조업 고객관리 흩어진 프로그램 통합</li></ul><h2>제 업무를 먼저 바꿨습니다</h2><p>분기마다 과정 15개와 행사 20회가 돌아갑니다.<br>실무자는 <span class="hl">저 한 명</span>입니다.</p><p>실무 인원을 늘리는 대신 AI를 도입했습니다. 슬랙 · 구글 드라이브/캘린더/메일 · 홈페이지 · 개인 옵시디언을 유기적으로 연결해 두었습니다.</p><ul><li><b>125</b> — 슬래시 명령(스킬) 명령어 하나가 여러 단계 업무를 대신합니다. 공지·출석·정산·백업·감사까지</li><li><b>305</b> — 업무 스크립트 슬랙·홈페이지·구글 API·PDF·이미지 처리를 다룹니다</li><li><b>57</b> — 사람 없이 도는 자동화 정해진 시각이나 조건에 알아서 실행됩니다. 여기에 cron 5줄이 더 있습니다</li></ul><h3>예를 들어 "주간 업무" 한 줄이면</h3><ul><li>대표와의 대화를 읽고 미팅 어젠다와 일정을 정리합니다</li><li>주간 공지와 뉴스레터를 제작합니다</li><li>예정 이벤트의 신청 인원을 조회합니다</li><li>참여자 예상 질문을 정리해 연사에게 전달합니다</li></ul><h2>가장 복잡했던 것 — 전수 대조 감사</h2><p>사람이 틀리기 쉬운 일은 없애는 게 아니라 매번 확인하게 만들었습니다. 아래 세 가지가 제가 만든 것 중 가장 복잡합니다.</p><ul><li><b>멤버십 정합성 감사</b> — 통합 명단 시트 ↔ 슬랙 팀 채널 ↔ 출석 시트 <strong>3소스 전수 대조</strong>. 매일 아침 7시 30분에 사람 없이 돕니다</li><li><b>파트너 소통 감사</b> — 카톡·슬랙 DM으로 알린 일정 ↔ 상품 노트 ↔ 홈페이지 라이브 ↔ 구글 캘린더 <strong>4자 전수 대조</strong>. 어긋난 곳만 리포트로 남깁니다</li><li><b>자기 시스템 감사</b> — 스킬 125개를 스스로 훑어 토큰 낭비 · 인증 에러 위험 · 끊긴 참조 · 중복 로직을 찾습니다. 메모리 인덱스 정합과 링크 무결성도 같은 방식으로 점검합니다</li></ul><p><strong>감사 스킬은 읽기 전용 리포트만 냅니다. 고치는 것은 사람이 따로 부르는 별도 명령입니다.</strong><br>'판단이 필요한 일은 자동화하지 않는다'를 말이 아니라 구조로 강제한 방식이고, 이 분리가 있어야 자동화를 믿고 맡길 수 있습니다.</p><h2>무엇을 자동화할지 고른 세 기준</h2><ul><li><b>자주 반복되고 시간이 오래 걸리는 일부터</b> — 주간 공지 예약, 출석 정리, 상품 정보 백업</li><li><b>사람이 실수하기 쉬운 일</b> — 회원 명단이 세 곳(관리 시트·대화방·출석부)에서 어긋나지 않는지 매주 대조합니다</li><li><b>판단이 필요한 일은 자동화하지 않음</b> — 회원에게 나가는 메시지는 발송 전 미리보기가 필수, 환불과 회원 이동은 확인을 거친 뒤 실행</li></ul><h3>규모는 달라도 순서는 같습니다</h3><p>업무 리스트업 → 자동화 범위 결정 → 우선순위 → 시범 적용 → 효과 확인 → 정식 전환 → 점검 체계</p><h2>입사 후</h2><p>전사 과제 포트폴리오를 짤 때<br><span class="hl">같은 세 기준</span>을 쓰겠습니다.</p><ul><li><b>반복 빈도가 높은 일</b> — 가장 먼저 자동화합니다. 여기서 회수한 시간이 나머지 과제의 재원이 됩니다</li><li><b>사람이 틀리기 쉬워 점검이 필요한 일</b> — 이 영역이 곧 기업의 자산, <strong>암묵지</strong>입니다. AX 과정은 암묵지를 문서화해 지식으로 관리하는 첫 시작을 만듭니다</li><li><b>판단이 필요해 자동화하면 안 되는 일</b> — 어느 산업이든 규제·안전·고객 정보처럼 틀리면 안 되는 영역이 분명히 있습니다</li></ul><p>특히 <strong>세 번째를 명시적으로 남기는 것이 신뢰를 만듭니다.</strong><br>'무엇을 자동화하지 않겠다'가 문서에 적혀 있어야 현업이 첫 과제를 맡깁니다.</p><h2>참여자들이 남긴 회고</h2><ul><li><b>플랫폼 · 전략기획</b> — 회사에서 AI를 많이 쓰지만 품질이 기대 이하인 결과물을 찍어내는 것에 거부감이 있었는데, <strong>제대로 된 작업 환경을 갖추면 즐겁게 쓸 수 있겠다는 기대가 다시 생겼다.</strong> 결과물을 더 낫게 만들려면 내 업무를 훨씬 잘게 쪼개서 각각을 명령으로 만들어야겠다.</li><li><b>모빌리티 서비스</b> — 그동안 대화하듯 쓰기만 했는데, 업무 일지 정리나 할 일 관리를 <strong>체계로 만들 수 있다는 점</strong>을 알게 됐다. 맡길 수 있는 부분을 잘 맡기면 <strong>시간이 무한한 사람처럼 일하지 않아도 된다.</strong></li><li><b>에너지 · B2B 영업</b> — 챗봇을 쓰거나 질문을 고민하는 정도였는데 <strong>이미 다음 단계로 넘어왔다는 게 놀라웠다.</strong> 도구를 쓰기 전에 어떤 부분을 자동화하고 싶은지, 나는 무엇을 기록하고 남기고 싶은지를 먼저 정의해봐야겠다.</li><li><b>의료 · 정밀의료 영업</b> — 말로만 듣던 것을 <strong>실제로 어떻게 쓰고 있는지</strong> 보여주셔서 유용했다. <strong>내가 무의식적으로 거치는 단계를 자세히 쪼개 보자. 시키려면 언제나 그만큼 잘 알아야 한다.</strong></li></ul><p>인용은 2024–2026년 회고 기록 <strong>292,003자</strong>에서 뽑았고 전부 익명으로 처리했습니다.</p><h2>경력</h2><ul><li><b>2019.06 – 현재</b> — 위어드벤처 · HBR Forum Korea — 학습 프로그램 설계 · 운영 총괄 누적 3,000명이 참여한 직장인 커뮤니티입니다. 교육 과정 30개 이상을 만들어 300회 이상 운영했고, 100명 규모 컨퍼런스 3회를 포함해 행사를 50회 이상 열었습니다. AI 리터러시 과정 설계와 진행, 운영 자동화 체계 구축, 4L 회고와 AAR 방법론 정착을 담당했습니다.</li><li><b>2017.03 – 2019.05</b> — 중앙화동재단 (구 월드컬처오픈) — 공간 운영 매니저 공연장·사무실·공유주방 등 5개 공간을 운영했습니다. 공유공간 예약 시스템 구축 프로젝트를 이끌어 수기 예약을 온라인으로 바꾸고, 이용 데이터를 운영 판단의 근거로 만들었습니다. 지역 페스티벌을 기획해 행사마다 관람객 500명 이상을 모았습니다.</li><li><b>2014.10 – 2015.02</b> — 퍼셉션 — 주니어 컨설턴트 차세대 스마트 전자칠판의 기술·디자인 컨설팅을 맡았습니다. 새로 나온 기술을 사용자가 실제로 쓸 제품의 모습으로 옮기는 작업이었습니다.</li><li><b>2011.06 – 2011.12</b> — 칸타 (Kantar) — 마케팅 리서치 인턴 64개국 대상 글로벌 마케팅 리서치 리포트 제작을 지원했습니다. 통계 데이터 분석과 시각화를 맡아 국가별 시장 특성과 소비자 인사이트를 뽑았습니다.</li><li><b>2008.03 – 2013.08</b> — 연세대학교 미래캠퍼스 정보통계학과 학사 2012년 캐나다 Saint Mary's University 교환학생.</li></ul><h2>마무리</h2><p>좋은 도구를 도입해도<br>무엇을 모르는지 모른다면<br>아무 일도 일어나지 않습니다.</p><p>어디서부터 AI를 적용해볼 수 있을지 '시작'해서,<br>임직원의 지식 아카이브로 '완성'하고 싶습니다.</p><p class="rfoot">skaug12@gmail.com · 010-7162-4923 · linkedin.com/in/fromsklee<br><a href="seulki-lee-ax-portfolio.pdf">발표덱 PDF (18쪽)</a> · 이슬기 · 2026</p></article>
-<script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
-<script>
-  Reveal.initialize({ width:1280, height:720, margin:0, hash:true, controls:true, progress:false, pdfMaxPagesPerSlide:1, embedded:true });
-</script>
+
 </body>
 </html>
