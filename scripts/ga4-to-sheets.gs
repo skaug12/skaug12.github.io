@@ -34,6 +34,7 @@ function collect() {
   syncPages();
   syncChannels();
   syncReadDepth();
+  syncCountries();
   syncSearch();
 }
 
@@ -87,6 +88,28 @@ function syncReadDepth() {
     },
     translate: { 2: depthKo },
   });
+}
+
+/** 국가·브라우저 언어: 국내/국외 비율과 번역 필요성 판단용 */
+function syncCountries() {
+  sync(countryCfg());
+}
+
+/** 한 번만 돌리는 소급 수집. GA4 개통일부터 어제까지 국가 데이터를 전부 끌어온다. */
+function backfillCountries() {
+  const cfg = countryCfg();
+  cfg.startDate = '2026-07-29';   // GA4 붙인 날. 더 앞이면 이 값을 당긴다
+  sync(cfg);
+}
+
+function countryCfg() {
+  return {
+    sheetName: '국가',
+    keyCols: 3,
+    dimensions: ['date', 'country', 'language'],
+    metrics: ['totalUsers', 'sessions', 'engagedSessions'],
+    headers: ['날짜', '국가', '브라우저 언어', '사용자', '세션', '참여세션'],
+  };
 }
 
 /* ---------- 사람이 읽는 말로 바꾸기 ---------- */
@@ -178,7 +201,7 @@ function scFetch(url, payload) {
 /* ---------- 공통 로직 ---------- */
 
 function sync(cfg) {
-  let rows = runReport(cfg.dimensions, cfg.metrics, cfg.dimensionFilter);
+  let rows = runReport(cfg.dimensions, cfg.metrics, cfg.dimensionFilter, cfg.startDate);
   if (cfg.translate) {
     rows = rows.map(r => {
       const out = r.slice();
@@ -201,6 +224,9 @@ function writeRows(cfg, rows) {
     sheet.setFrozenRows(1);
   }
 
+  // 날짜 열을 텍스트 서식으로 못박아 Date 자동변환을 막는다
+  sheet.getRange(1, 1, sheet.getMaxRows(), 1).setNumberFormat('@');
+
   const last = sheet.getLastRow();
   const width = cfg.headers.length;
   const existing = last > 1 ? sheet.getRange(2, 1, last - 1, width).getValues() : [];
@@ -220,18 +246,71 @@ function writeRows(cfg, rows) {
     }
   });
 
+  existing.forEach(r => { r[0] = normKey(r[0]); });
   existing.sort((a, b) => String(a[0]).localeCompare(String(b[0])));
   sheet.getRange(2, 1, existing.length, width).setValues(existing);
+
+  const surplus = last - (existing.length + 1);
+  if (surplus > 0) sheet.deleteRows(existing.length + 2, surplus);
+
   Logger.log('%s: 총 %s행 (신규 %s)', cfg.sheetName, existing.length, added);
 }
 
-function key(row, n) {
-  return row.slice(0, n).join(' ');
+/**
+ * 이미 쌓인 중복 행을 한 번만 정리한다. 같은 키는 마지막 것만 남긴다.
+ * 위 버그를 고치기 전에 들어간 행을 걷어내는 용도라, 한 번 돌리면 다시 안 돌려도 된다.
+ */
+function repair() {
+  const KEY_COLS = { '일별': 1, '글별': 2, '유입': 2, '읽기깊이': 3, '국가': 3, '검색': 2 };
+  const ss = SpreadsheetApp.openById(SPREADSHEET_ID);
+
+  Object.keys(KEY_COLS).forEach(name => {
+    const sheet = ss.getSheetByName(name);
+    if (!sheet) return;
+
+    const last = sheet.getLastRow();
+    const width = sheet.getLastColumn();
+    if (last < 3) return;
+
+    sheet.getRange(1, 1, sheet.getMaxRows(), 1).setNumberFormat('@');
+
+    const rows = sheet.getRange(2, 1, last - 1, width).getValues();
+    const seen = {};
+    const kept = [];
+    rows.forEach(r => {
+      const row = r.slice();
+      row[0] = normKey(row[0]);
+      const k = key(row, KEY_COLS[name]);
+      if (k in seen) kept[seen[k]] = row;
+      else { seen[k] = kept.length; kept.push(row); }
+    });
+
+    kept.sort((a, b) => String(a[0]).localeCompare(String(b[0])));
+    sheet.getRange(2, 1, kept.length, width).setValues(kept);
+
+    const surplus = last - (kept.length + 1);
+    if (surplus > 0) sheet.deleteRows(kept.length + 2, surplus);
+
+    Logger.log('%s: %s행 → %s행 (중복 %s 제거)', name, rows.length, kept.length, rows.length - kept.length);
+  });
 }
 
-function runReport(dimensions, metrics, dimensionFilter) {
+function key(row, n) {
+  return row.slice(0, n).map(normKey).join(' ');
+}
+
+/**
+ * Sheets 는 "2026-08-07" 을 셀에 넣는 순간 Date 객체로 바꾼다.
+ * 다음 실행 때 읽어오면 String(Date) 가 "Fri Aug 07 2026..." 이라 키가 안 맞고,
+ * 갱신 대신 새 행이 붙어 같은 날짜가 몇 번씩 쌓였다. 읽는 쪽에서 되돌린다.
+ */
+function normKey(v) {
+  return v instanceof Date ? Utilities.formatDate(v, 'GMT+9', 'yyyy-MM-dd') : String(v);
+}
+
+function runReport(dimensions, metrics, dimensionFilter, startDate) {
   const req = {
-    dateRanges: [{ startDate: LOOKBACK_DAYS + 'daysAgo', endDate: 'yesterday' }],
+    dateRanges: [{ startDate: startDate || LOOKBACK_DAYS + 'daysAgo', endDate: 'yesterday' }],
     dimensions: dimensions.map(name => ({ name })),
     metrics: metrics.map(name => ({ name })),
     orderBys: [{ dimension: { dimensionName: 'date' } }],
