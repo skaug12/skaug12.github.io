@@ -1,4 +1,26 @@
-{{ if .IsHome }}
+{{ if eq .Params.slug "numbers" }}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Dataset",
+  "name": {{ .Title }},
+  "description": {{ .Params.summary }},
+  "url": {{ .Permalink }},
+  "inLanguage": "ko-KR",
+  "license": "https://creativecommons.org/licenses/by/4.0/",
+  "dateModified": {{ .Lastmod.Format "2006-01-02" }},
+  "creator": {
+    "@type": "Person",
+    "name": {{ .Site.Params.author }},
+    "url": {{ .Site.BaseURL }}{{ with .Site.Params.linkedin }},
+    "sameAs": [{{ . }}]{{ end }}
+  },
+  "measurementTechnique": "운영 원자료 직접 집계 (등록 아이디 기준 참여자 추적, 정원 대비 등록 인원으로 성패 판정)",
+  "temporalCoverage": "2018/2026",
+  "keywords": ["커뮤니티 운영", "리텐션", "재등록률", "이탈률", "학습 커뮤니티", "1인 운영"]
+}
+</script>
+{{ else if .IsHome }}
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",

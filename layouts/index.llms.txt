@@ -31,6 +31,7 @@ LinkedIn: https://www.linkedin.com/in/fromsklee/
 {{ range where (where $.Site.RegularPages "Section" "posts") ".Params.categories" "intersect" (slice $c) }}- {{ .Title }} ({{ .Permalink }}) [{{ .Date.Format "2006-01-02" }}]: {{ or .Params.summary .Summary | plainify }}
 {{ end }}{{ end }}
 ## 페이지
+- 숫자로 본 커뮤니티 운영 8년: {{ "numbers/" | absURL }} — 이 사이트의 1차 수치를 표로 모은 페이지. 항목·수치·모집단·출처 글이 함께 있다
 - 만든 시스템: {{ "systems/" | absURL }} — 커뮤니티 운영을 위해 만든 슬래시 명령 125개 전체 목록과 자주 쓰는 12개의 제작 계기·결과
 - AX 전략 기획 포트폴리오: {{ "portfolio/" | absURL }} — AI 리터러시 과정 운영, 실습 설계, 1인 운영 자동화 자산
 - 소개: {{ "about/" | absURL }}
