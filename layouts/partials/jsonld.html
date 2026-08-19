@@ -44,12 +44,60 @@
   "author": {
     "@type": "Person",
     "name": {{ .Site.Params.author }},
-    "url": {{ .Site.BaseURL }}
+    "url": {{ .Site.BaseURL }},
+    "jobTitle": "커뮤니티 매니저"{{ with .Site.Params.linkedin }},
+    "sameAs": [{{ . }}]{{ end }}
   },
   "publisher": {
     "@type": "Person",
     "name": {{ .Site.Params.author }},
     "url": {{ .Site.BaseURL }}
+  }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": {{ .Site.Title }}, "item": {{ .Site.BaseURL }} },
+    { "@type": "ListItem", "position": 2, "name": "글", "item": {{ "posts/" | absURL }} }{{ with .Params.categories }},
+    { "@type": "ListItem", "position": 3, "name": {{ index . 0 }}, "item": {{ printf "categories/%s/" (index . 0 | urlize) | absURL }} }{{ end }},
+    { "@type": "ListItem", "position": {{ if .Params.categories }}4{{ else }}3{{ end }}, "name": {{ .Title }}, "item": {{ .Permalink }} }
+  ]
+}
+</script>
+{{ else if .IsSection }}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  "name": {{ .Title }},
+  "url": {{ .Permalink }},
+  "inLanguage": "ko-KR",
+  "mainEntity": {
+    "@type": "ItemList",
+    "numberOfItems": {{ len .Pages }},
+    "itemListElement": [{{ range $i, $p := .Pages }}{{ if $i }},{{ end }}
+      { "@type": "ListItem", "position": {{ add $i 1 }}, "url": {{ $p.Permalink }}, "name": {{ $p.Title }} }{{ end }}
+    ]
+  }
+}
+</script>
+{{ else if eq .Kind "term" }}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  "name": {{ .Title }},
+  "url": {{ .Permalink }},
+  "inLanguage": "ko-KR",
+  "mainEntity": {
+    "@type": "ItemList",
+    "numberOfItems": {{ len .Pages }},
+    "itemListElement": [{{ range $i, $p := .Pages }}{{ if $i }},{{ end }}
+      { "@type": "ListItem", "position": {{ add $i 1 }}, "url": {{ $p.Permalink }}, "name": {{ $p.Title }} }{{ end }}
+    ]
   }
 }
 </script>
