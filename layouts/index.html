@@ -10,6 +10,7 @@
       <span class="grp">Category</span>
       {{ range hugo.Data.categories }}<a href="{{ "categories/" | absURL }}{{ .name | urlize }}/">{{ .name }}</a>{{ end }}
       <span class="grp">More</span>
+      <a href="{{ "systems/" | absURL }}">만든 시스템</a>
       <a href="{{ "about/" | absURL }}">소개</a>
     </nav>
   </aside>
