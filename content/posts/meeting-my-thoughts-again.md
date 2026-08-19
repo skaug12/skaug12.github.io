@@ -1,7 +1,7 @@
 ---
 title: "생각을 다시 만나게 하는 구조"
 slug: meeting-my-thoughts-again
-date: 2026-08-19
+date: 2026-08-02
 lastmod: 2026-08-19
 categories: ["개인 자동화"]
 summary: "메모를 열심히 쌓았는데 다시 열어본 적이 없었다. 검색해서 찾는 대신 관련된 글이 저절로 모여 있게 만들었다. 주 1회 다시 만들어진다."

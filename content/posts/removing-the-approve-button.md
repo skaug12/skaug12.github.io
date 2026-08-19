@@ -1,7 +1,7 @@
 ---
 title: "승인 버튼을 없앤 날"
 slug: removing-the-approve-button
-date: 2026-08-05
+date: 2026-07-14
 lastmod: 2026-08-19
 categories: ["인사이트 노트"]
 summary: "참석 변경을 전부 내가 승인하게 해뒀다. 안전해 보였는데 실제로는 내가 병목이었다. 하루에 같은 알림이 열아홉 번 온 날 승인을 걷어냈다. 대신 한 가지는 남겼다."

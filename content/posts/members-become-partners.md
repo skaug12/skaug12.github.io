@@ -1,7 +1,7 @@
 ---
 title: "멤버가 파트너가 되는 구조"
 slug: members-become-partners
-date: 2026-08-18
+date: 2026-05-25
 lastmod: 2026-08-19
 categories: ["생각"]
 summary: "좋은 연사를 밖에서 데려오는 것과 안에 있던 사람이 자라서 앞에 서는 건 다른 일이다. 이 커뮤니티가 10년을 이어온 방식은 뒤쪽이었다."

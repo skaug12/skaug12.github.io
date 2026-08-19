@@ -1,7 +1,7 @@
 ---
 title: "명단이 세 군데면 세 군데가 다 다르다"
 slug: three-lists-three-answers
-date: 2026-07-30
+date: 2026-06-11
 lastmod: 2026-08-19
 categories: ["인사이트 노트"]
 summary: "누가 이번 시즌 멤버인가. 이 질문에 답이 세 개 있었다. 등록 시트와 팀 채널과 출석부가 각각 다른 명단을 갖고 있었고 아무도 그걸 몰랐다."
