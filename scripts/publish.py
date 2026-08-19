@@ -112,6 +112,41 @@ def run(cmd, cwd=REPO, **kw):
     return subprocess.run(cmd, cwd=cwd, check=True, **kw)
 
 
+INDEXNOW_KEY = "50be09e207bb7dac8d344a9418b46656"
+
+
+def submit_indexnow(urls: list) -> None:
+    """빙·네이버·얀덱스에 색인 요청. 실패해도 발행은 계속한다(구글은 미참여)."""
+    if not urls:
+        return
+    payload = {
+        "host": BASE_URL.split("//", 1)[1].rstrip("/"),
+        "key": INDEXNOW_KEY,
+        "keyLocation": f"{BASE_URL}/{INDEXNOW_KEY}.txt",
+        "urlList": urls,
+    }
+    import json as _json
+    req = urllib.request.Request(
+        "https://api.indexnow.org/indexnow",
+        data=_json.dumps(payload).encode(),
+        headers={"Content-Type": "application/json; charset=utf-8"},
+    )
+    try:
+        with urllib.request.urlopen(req, timeout=30) as r:
+            print(f"색인 요청(IndexNow) {len(urls)}건 → {r.status} {r.reason}")
+    except Exception as e:
+        print(f"색인 요청 실패(무시하고 진행): {e}")
+
+
+def sitemap_urls() -> list:
+    """사이트맵의 전체 URL. 실패하면 빈 목록."""
+    try:
+        with urllib.request.urlopen(f"{BASE_URL}/sitemap.xml", timeout=20) as r:
+            return re.findall(r"<loc>([^<]+)</loc>", r.read().decode("utf-8", "ignore"))
+    except Exception:
+        return []
+
+
 def deploy():
     """로컬 빌드 후 public/을 gh-pages로 강제 푸시 (임시 git)."""
     run([HUGO, "--minify"])
@@ -138,6 +173,7 @@ def main():
     if args.deploy:
         deploy()
         print(f"배포 완료 → {BASE_URL}/")
+        submit_indexnow(sitemap_urls())
         return
 
     targets = find_targets()
@@ -176,6 +212,10 @@ def main():
         else:
             ok_all = False
             print(f"✗ 검증 실패 (5분 내 미반영): {url} — Pages 빌드 상태 확인 필요")
+
+    published = [f"{BASE_URL}/posts/{fm['slug']}/" for _, fm, _ in targets]
+    if published:
+        submit_indexnow(published + [f"{BASE_URL}/", f"{BASE_URL}/posts/"])
 
     sys.exit(0 if ok_all else 1)
 
