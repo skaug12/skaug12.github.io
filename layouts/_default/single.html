@@ -12,6 +12,19 @@
     {{ end }}
     <div class="post-content">{{ .Content }}</div>
   </article>
+  {{ if eq .Section "posts" }}{{ $cur := . }}{{ $cat := "" }}{{ with .Params.categories }}{{ $cat = index . 0 }}{{ end }}
+  {{ $rel := where (where .Site.RegularPages "Section" "posts") "Permalink" "!=" .Permalink }}
+  {{ with $cat }}{{ $rel = where $rel ".Params.categories" "intersect" (slice $cat) }}{{ end }}
+  {{ $rel = first 3 ($rel.ByDate.Reverse) }}
+  {{ with $rel }}
+  <nav class="related" aria-label="이어서 읽을 글">
+    <p class="related-h">이어서 읽을 글</p>
+    <ul>
+      {{ range . }}<li><a href="{{ .Permalink }}">{{ .Title }}</a><span>{{ or .Params.summary .Summary | plainify | truncate 70 }}</span></li>
+      {{ end }}
+    </ul>
+  </nav>
+  {{ end }}{{ end }}
   {{ partial "reactions.html" . }}
 </div>
 {{ end }}

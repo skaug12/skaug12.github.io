@@ -411,3 +411,10 @@ footer.site { border-top: 0.5px solid var(--line); margin-top: 0; }
 @media (prefers-reduced-motion: reduce) {
   * { scroll-behavior: auto !important; transition: none !important; animation: none !important; }
 }
+
+/* 이어서 읽을 글 */
+.related { margin: var(--sp-block) 0 0; padding-top: var(--sp-tight); border-top: 1px solid var(--line-soft); }
+.related-h { font-size: .86rem; color: var(--ink-faint); margin: 0 0 .8rem; letter-spacing: var(--tracking); }
+.related ul { list-style: none; margin: 0; padding: 0; display: grid; gap: .9rem; }
+.related li a { display: block; font-weight: 600; letter-spacing: var(--tracking); }
+.related li span { display: block; margin-top: .2rem; font-size: .86rem; color: var(--ink-faint); letter-spacing: var(--tracking); }
