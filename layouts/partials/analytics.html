@@ -1,0 +1,12 @@
+{{/*
+  방문 분석. hugo.toml [params]에 값을 넣은 것만 렌더된다. 비면 아무 스크립트도 안 나감.
+    cf_beacon = Cloudflare Web Analytics 토큰 (쿠키 없음, 동의배너 불필요)
+    ga4       = GA4 측정 ID (G-XXXXXXXXXX)
+*/}}
+{{ with .Site.Params.cf_beacon }}
+<script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "{{ . }}"}'></script>
+{{ end }}
+{{ with .Site.Params.ga4 }}
+<script async src="https://www.googletagmanager.com/gtag/js?id={{ . }}"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','{{ . }}');</script>
+{{ end }}

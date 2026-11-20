@@ -1,0 +1,15 @@
+{{ if and (eq .Section "posts") .Site.Params.reactions }}
+{{ $slug := .Params.slug | default .File.ContentBaseName }}
+<div class="reactions" data-slug="{{ $slug }}" data-api="{{ .Site.Params.reactions }}">
+  <button class="react-like" type="button" aria-pressed="false" aria-label="좋아요">
+    <span class="ic" aria-hidden="true">♡</span><span class="react-likes num">0</span>
+  </button>
+  <span class="react-views" title="조회수">조회 <span class="react-views-n num">–</span></span>
+  <span class="react-share-group">
+    <button class="react-share" data-platform="copy" type="button" aria-label="링크 복사">링크 복사</button>
+    <span class="react-shares num" title="공유 클릭 수">0</span>
+  </span>
+</div>
+{{ $reactJs := resources.Get "js/reactions.js" | fingerprint }}
+<script src="{{ $reactJs.RelPermalink }}" defer></script>
+{{ end }}

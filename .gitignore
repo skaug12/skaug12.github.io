@@ -1,0 +1,7 @@
+public/
+resources/
+logs/
+.hugo_build.lock
+.DS_Store
+__pycache__/
+scripts/.vault_path

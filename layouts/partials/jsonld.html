@@ -1,0 +1,126 @@
+{{ if eq .Params.slug "numbers" }}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Dataset",
+  "name": {{ .Title }},
+  "description": {{ .Params.summary }},
+  "url": {{ .Permalink }},
+  "inLanguage": "ko-KR",
+  "license": "https://creativecommons.org/licenses/by/4.0/",
+  "dateModified": {{ .Lastmod.Format "2006-01-02" }},
+  "creator": {
+    "@type": "Person",
+    "name": {{ .Site.Params.author }},
+    "url": {{ .Site.BaseURL }}{{ with .Site.Params.linkedin }},
+    "sameAs": [{{ . }}]{{ end }}
+  },
+  "measurementTechnique": "운영 원자료 직접 집계 (등록 아이디 기준 참여자 추적, 정원 대비 등록 인원으로 성패 판정)",
+  "temporalCoverage": "2018/2026",
+  "keywords": ["커뮤니티 운영", "리텐션", "재등록률", "이탈률", "학습 커뮤니티", "1인 운영"]
+}
+</script>
+{{ else if .IsHome }}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "name": {{ .Site.Title }},
+      "url": {{ .Site.BaseURL }},
+      "description": {{ .Site.Params.description }},
+      "inLanguage": "ko-KR"
+    },
+    {
+      "@type": "Person",
+      "name": {{ .Site.Params.author }},
+      "url": {{ .Site.BaseURL }}{{ with .Site.Params.linkedin }},
+      "sameAs": [{{ . }}]{{ end }}
+    }
+  ]
+}
+</script>
+{{ else if and .IsPage (eq .Section "posts") }}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": {{ .Title }},
+  "description": {{ or .Params.summary .Summary | plainify }},
+  "url": {{ .Permalink }},
+  "datePublished": {{ .Date.Format "2006-01-02T15:04:05-07:00" }},
+  "dateModified": {{ .Lastmod.Format "2006-01-02T15:04:05-07:00" }},
+  "inLanguage": "ko-KR",
+  "wordCount": {{ .WordCount }},
+  "image": {{ "og.jpg" | absURL }},
+  {{ with .Params.categories }}"articleSection": [{{ range $i, $c := . }}{{ if $i }}, {{ end }}{{ $c }}{{ end }}],
+  {{ end }}{{ with .Params.series }}"isPartOf": {
+    "@type": "CreativeWorkSeries",
+    "name": {{ index . 0 }}
+  },
+  {{ end }}"mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": {{ .Permalink }}
+  },
+  "author": {
+    "@type": "Person",
+    "name": {{ .Site.Params.author }},
+    "url": {{ .Site.BaseURL }},
+    "jobTitle": "커뮤니티 매니저"{{ with .Site.Params.linkedin }},
+    "sameAs": [{{ . }}]{{ end }}
+  },
+  "publisher": {
+    "@type": "Person",
+    "name": {{ .Site.Params.author }},
+    "url": {{ .Site.BaseURL }}
+  }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": {{ .Site.Title }}, "item": {{ .Site.BaseURL }} },
+    { "@type": "ListItem", "position": 2, "name": "글", "item": {{ "posts/" | absURL }} }{{ with .Params.categories }},
+    { "@type": "ListItem", "position": 3, "name": {{ index . 0 }}, "item": {{ printf "categories/%s/" (index . 0 | urlize) | absURL }} }{{ end }},
+    { "@type": "ListItem", "position": {{ if .Params.categories }}4{{ else }}3{{ end }}, "name": {{ .Title }}, "item": {{ .Permalink }} }
+  ]
+}
+</script>
+{{ else if .IsSection }}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  "name": {{ .Title }},
+  "url": {{ .Permalink }},
+  "inLanguage": "ko-KR",
+  "mainEntity": {
+    "@type": "ItemList",
+    "numberOfItems": {{ len .Pages }},
+    "itemListElement": [{{ range $i, $p := .Pages }}{{ if $i }},{{ end }}
+      { "@type": "ListItem", "position": {{ add $i 1 }}, "url": {{ $p.Permalink }}, "name": {{ $p.Title }} }{{ end }}
+    ]
+  }
+}
+</script>
+{{ else if eq .Kind "term" }}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  "name": {{ .Title }},
+  "url": {{ .Permalink }},
+  "inLanguage": "ko-KR",
+  "mainEntity": {
+    "@type": "ItemList",
+    "numberOfItems": {{ len .Pages }},
+    "itemListElement": [{{ range $i, $p := .Pages }}{{ if $i }},{{ end }}
+      { "@type": "ListItem", "position": {{ add $i 1 }}, "url": {{ $p.Permalink }}, "name": {{ $p.Title }} }{{ end }}
+    ]
+  }
+}
+</script>
+{{ end }}
